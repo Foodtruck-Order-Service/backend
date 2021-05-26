@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.fos.BookmarkMapper">
+    <resultMap id="bookmarkResultMap" type="kr.co.fos.Bookmark">
+        <result column="NO" property="no" />
+        <result column="MEMBER_NO" property="memberNo" />
+        <result column="FOODTRUCK_NO" property="foodtruckNo" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="memberNo != null and memberNo != ''">
+                AND MEMBER_NO = #{memberNo}
+            </if>
+            <if test="foodtruckNo != null and foodtruckNo != ''">
+                AND FOODTRUCK_NO = #{foodtruckNo}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" parameterType="kr.co.fos.Bookmark" resultType="int">
+        SELECT COUNT(*)
+        FROM bookmark
+        <include refid="whereSql" />
+    </select>
+
+    <select id="list" parameterType="kr.co.fos.Bookmark" resultMap="bookmarkResultMap">
+        SELECT *
+        FROM (
+            SELECT
+                NO,
+                MEMBER_NO,
+                FOODTRUCK_NO
+            FROM bookmark
+            <include refid="whereSql" />
+        ) TB
+        <where>
+            <if test="itemStart > -1">
+                RN BETWEEN (#{itemStart} + 1)
+                       AND (#{itemStart} + #{itemSizePerPage})
+            </if>
+        </where>
+    </select>
+
+    <select id="select" parameterType="kr.co.fos.Bookmark" resultMap="bookmarkResultMap">
+        SELECT
+            NO,
+            MEMBER_NO,
+            FOODTRUCK_NO
+        FROM bookmark
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="kr.co.fos.Bookmark">
+        INSERT INTO bookmark (
+            NO,
+            MEMBER_NO,
+            FOODTRUCK_NO
+        ) VALUES (
+            #{no},
+            #{memberNo},
+            #{foodtruckNo}
+        )
+    </insert>
+
+    <update id="update" parameterType="kr.co.fos.Bookmark">
+        UPDATE bookmark
+        <set>
+            <if test="no != ''">
+                NO = #{no},
+            </if>
+            <if test="memberNo != ''">
+                MEMBER_NO = #{memberNo},
+            </if>
+            <if test="foodtruckNo != ''">
+                FOODTRUCK_NO = #{foodtruckNo},
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="kr.co.fos.Bookmark">
+        DELETE FROM bookmark
+        <include refid="whereSql" />
+    </delete>
+</mapper>

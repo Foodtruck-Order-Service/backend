@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.fos.MenuDetailMapper">
+    <resultMap id="menuDetailResultMap" type="kr.co.fos.MenuDetail">
+        <result column="NO" property="no" />
+        <result column="ORDER_INFO_NO" property="orderInfoNo" />
+        <result column="OPTION_NAME" property="optionName" />
+        <result column="OPTION_VALUE" property="optionValue" />
+        <result column="ADD_AMOUNT" property="addAmount" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="orderInfoNo != null and orderInfoNo != ''">
+                AND ORDER_INFO_NO = #{orderInfoNo}
+            </if>
+            <if test="optionName != null and optionName != ''">
+                AND OPTION_NAME = #{optionName}
+            </if>
+            <if test="optionValue != null and optionValue != ''">
+                AND OPTION_VALUE = #{optionValue}
+            </if>
+            <if test="addAmount != null and addAmount != ''">
+                AND ADD_AMOUNT = #{addAmount}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" parameterType="kr.co.fos.MenuDetail" resultType="int">
+        SELECT COUNT(*)
+        FROM menu_detail
+        <include refid="whereSql" />
+    </select>
+
+    <select id="list" parameterType="kr.co.fos.MenuDetail" resultMap="menuDetailResultMap">
+        SELECT *
+        FROM (
+            SELECT
+                NO,
+                ORDER_INFO_NO,
+                OPTION_NAME,
+                OPTION_VALUE,
+                ADD_AMOUNT
+            FROM menu_detail
+            <include refid="whereSql" />
+        ) TB
+        <where>
+            <if test="itemStart > -1">
+                RN BETWEEN (#{itemStart} + 1)
+                       AND (#{itemStart} + #{itemSizePerPage})
+            </if>
+        </where>
+    </select>
+
+    <select id="select" parameterType="kr.co.fos.MenuDetail" resultMap="menuDetailResultMap">
+        SELECT
+            NO,
+            ORDER_INFO_NO,
+            OPTION_NAME,
+            OPTION_VALUE,
+            ADD_AMOUNT
+        FROM menu_detail
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="kr.co.fos.MenuDetail">
+        INSERT INTO menu_detail (
+            NO,
+            ORDER_INFO_NO,
+            OPTION_NAME,
+            OPTION_VALUE,
+            ADD_AMOUNT
+        ) VALUES (
+            #{no},
+            #{orderInfoNo},
+            #{optionName},
+            #{optionValue},
+            #{addAmount}
+        )
+    </insert>
+
+    <update id="update" parameterType="kr.co.fos.MenuDetail">
+        UPDATE menu_detail
+        <set>
+            <if test="no != ''">
+                NO = #{no},
+            </if>
+            <if test="orderInfoNo != ''">
+                ORDER_INFO_NO = #{orderInfoNo},
+            </if>
+            <if test="optionName != ''">
+                OPTION_NAME = #{optionName},
+            </if>
+            <if test="optionValue != ''">
+                OPTION_VALUE = #{optionValue},
+            </if>
+            <if test="addAmount != ''">
+                ADD_AMOUNT = #{addAmount},
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="kr.co.fos.MenuDetail">
+        DELETE FROM menu_detail
+        <include refid="whereSql" />
+    </delete>
+</mapper>
