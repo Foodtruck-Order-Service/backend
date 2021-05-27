@@ -10,7 +10,6 @@ public class Bookmark implements Serializable {
 
     private int itemStart;
     private int itemSizePerPage;
-    //ldysdfasfda
     public Bookmark() {
     }
 
