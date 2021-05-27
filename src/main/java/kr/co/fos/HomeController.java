@@ -39,8 +39,8 @@ public class HomeController {
 		try{
 				String androidID = member.getId();
 				String androidPW = member.getPassword();
-				System.out.println("안드로이드에서 받아온 id : " + androidID);
-				System.out.println("안드로이드에서 받아온 pw : " + androidPW);
+				System.out.println("안드로이드에서 받아온 id = " + androidID);
+				System.out.println("안드로이드에서 받아온 pw = " + androidPW);
 				
 				Gson gson = new Gson();
 				String result = gson.toJson(member);
