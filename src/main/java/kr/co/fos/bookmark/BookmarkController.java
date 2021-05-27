@@ -17,7 +17,7 @@ public class BookmarkController {
 		return null;
 	}
 	
-	@GetMapping("/{no}")
+	@GetMapping
 	public ResponseEntity<Object> doBookmarkInquiry(Bookmark bookmark) {
 		return null;
 	}
