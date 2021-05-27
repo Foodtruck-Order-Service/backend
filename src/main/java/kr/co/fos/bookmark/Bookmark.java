@@ -11,8 +11,6 @@ public class Bookmark implements Serializable {
     private int itemStart;
     private int itemSizePerPage;
 
-    //이수형
-
     public Bookmark() {
     }
 
