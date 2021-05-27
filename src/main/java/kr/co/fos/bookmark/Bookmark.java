@@ -7,10 +7,10 @@ public class Bookmark implements Serializable {
     private String no;
     private String memberNo;
     private String foodtruckNo;
-
+    
     private int itemStart;
     private int itemSizePerPage;
-
+    //이동여 test
     public Bookmark() {
     }
 
