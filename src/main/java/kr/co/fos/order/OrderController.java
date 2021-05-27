@@ -34,8 +34,8 @@ public class OrderController {
 		return null;
 	}
 	
-	@DeleteMapping("/{no}/{mno}")
-	public ResponseEntity<Object> doOrderCancle(Order order, @PathVariable int mno) {
+	@DeleteMapping("/{no}")
+	public ResponseEntity<Object> doOrderCancle(Order order) {
 		return null;
 	}
 	
@@ -44,18 +44,8 @@ public class OrderController {
 		return null;
 	}
 	
-	@PostMapping("/{no}/payment")
-	public ResponseEntity<Object> doPayment(Order order) {
-		return null;
-	}
-	
-	@GetMapping("/{no}/payment")
-	public ResponseEntity<Object> doPaymentCancle(Order order) {
-		return null;
-	}
-	
-	@GetMapping("/time/{no}")
-	public ResponseEntity<Object> doWaitTimeInquiry(Foodtruck foodtruck) {
+	@GetMapping("/time")
+	public ResponseEntity<Object> doWaitTimeInquiry(Order Order) {
 		return null;
 	}
 }

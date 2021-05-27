@@ -18,7 +18,7 @@ public class MemberController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Object> doMemberListInquiry(String type, String string) {
+	public ResponseEntity<Object> doMemberListInquiry(Member member) {
 		return null;
 	}
 	
@@ -37,7 +37,7 @@ public class MemberController {
 		return null;
 	}
 	
-	@PostMapping("/{no}/business")
+	@PutMapping("/{no}/business")
 	public ResponseEntity<Object> doBusinessAuth(Member member) {
 		return null;
 	}

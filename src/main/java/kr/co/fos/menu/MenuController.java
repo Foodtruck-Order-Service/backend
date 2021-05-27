@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/foodtruck/{fno}/menu")
+@RequestMapping("/menu")
 public class MenuController {
 	@PostMapping
-	public ResponseEntity<Object> doMenuRegister(@PathVariable int fno, Menu menu, MultipartFile attach) {
+	public ResponseEntity<Object> doMenuRegister(Menu menu, MultipartFile attach) {
 		return null;
 	}
 	
 	@GetMapping
-	public ResponseEntity<Object> doMenuListInquiry(@PathVariable int fno) {
+	public ResponseEntity<Object> doMenuListInquiry(Menu menu) {
 		return null;
 	}
 	
 	@GetMapping("/{no}")
-	public ResponseEntity<Object> doMenuDetailInquiry(@PathVariable int fno, Menu menu) {
+	public ResponseEntity<Object> doMenuDetailInquiry(Menu menu) {
 		return null;
 	}
 	
 	@PutMapping("/{no}")
-	public ResponseEntity<Object> doMenuUpdate(@PathVariable int fno, Menu menu, MultipartFile attach) {
+	public ResponseEntity<Object> doMenuUpdate(Menu menu, MultipartFile attach) {
 		return null;
 	}
 	
 	@DeleteMapping("/{no}")
-	public ResponseEntity<Object> doMenuDelete(@PathVariable int fno, Menu menu) {
+	public ResponseEntity<Object> doMenuDelete(Menu menu) {
 		return null;
 	}
 }

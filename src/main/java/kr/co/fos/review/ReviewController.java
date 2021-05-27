@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/foodtruck/{fno}/review")
+@RequestMapping("/review")
 public class ReviewController {
 	@PostMapping
 	public ResponseEntity<Object> doReviewRegister(Review review, MultipartFile attach) {
@@ -19,17 +19,17 @@ public class ReviewController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Object> doReviewListInquiry(@PathVariable int fno) {
+	public ResponseEntity<Object> doReviewListInquiry(Review review) {
 		return null;
 	}
 	
 	@PutMapping("/{no}")
-	public ResponseEntity<Object> doReviewUpdate(@PathVariable int fno, Review review, MultipartFile attach) {
+	public ResponseEntity<Object> doReviewUpdate(Review review, MultipartFile attach) {
 		return null;
 	}
 	
 	@DeleteMapping("/{no}")
-	public ResponseEntity<Object> doReviewDelete(@PathVariable int fno, Review review) {
+	public ResponseEntity<Object> doReviewDelete(Review review) {
 		return null;
 	}
 }
