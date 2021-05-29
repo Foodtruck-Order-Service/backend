@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.MemberMapper">
-    <resultMap id="memberResultMap" type="kr.co.fos.Member">
+<mapper namespace="kr.co.fos.member.MemberMapper">
+    <resultMap id="memberResultMap" type="kr.co.fos.member.Member">
         <result column="NO" property="no" />
         <result column="ID" property="id" />
         <result column="PASSWORD" property="password" />
@@ -44,36 +44,22 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Member" resultType="int">
+    <select id="count" parameterType="kr.co.fos.member.Member" resultType="int">
         SELECT COUNT(*)
         FROM member
-        <include refid="whereSql" />
+    
+        <!-- <include refid="whereSql" />  -->
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Member" resultMap="memberResultMap">
+    <select id="list" parameterType="kr.co.fos.member.Member" resultMap="memberResultMap">
         SELECT *
-        FROM (
-            SELECT
-                NO,
-                ID,
-                PASSWORD,
-                RRN,
-                NAME,
-                EMAIL,
-                PHONE,
-                TYPE
-            FROM member
-            <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
+        FROM FOS.MEMBER
+        <!-- WHERE ID = #{id} AND PASSWORD = #{password}-->
+        <include refid="whereSql" />
+   
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Member" resultMap="memberResultMap">
+    <select id="select" parameterType="kr.co.fos.member.Member" resultMap="memberResultMap">
         SELECT
             NO,
             ID,
@@ -87,7 +73,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Member">
+    <insert id="insert" parameterType="kr.co.fos.member.Member">
         INSERT INTO member (
             NO,
             ID,
@@ -109,7 +95,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Member">
+    <update id="update" parameterType="kr.co.fos.member.Member">
         UPDATE member
         <set>
             <if test="no != ''">
@@ -139,7 +125,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Member">
+    <delete id="delete" parameterType="kr.co.fos.member.Member">
         DELETE FROM member
         <include refid="whereSql" />
     </delete>

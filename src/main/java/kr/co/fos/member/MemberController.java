@@ -1,5 +1,9 @@
 package kr.co.fos.member;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
+	@Autowired
+	private MemberServiceImpl memberServiceImpl;
+	
 	@PostMapping
 	public ResponseEntity<Object> doMemberRegister(Member member) {
 		return null;
@@ -19,11 +26,15 @@ public class MemberController {
 	
 	@GetMapping
 	public ResponseEntity<Object> doMemberListInquiry(Member member) {
-		return null;
+		List<Member> memberList = memberServiceImpl.memberListInquiry(member);
+		System.out.println("ASDA" + memberList);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(memberList);
 	}
 	
 	@GetMapping("/{no}")
 	public ResponseEntity<Object> doMemberDetailInquiry(Member member) {
+		
 		return null;
 	}
 	

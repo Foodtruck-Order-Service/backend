@@ -4,7 +4,13 @@ import java.sql.Date;
 import java.io.Serializable;
 
 public class Member implements Serializable {
-    private String no;
+    @Override
+	public String toString() {
+		return "Member [no=" + no + ", id=" + id + ", password=" + password + ", rrn=" + rrn + ", name=" + name
+				+ ", email=" + email + ", phone=" + phone + ", type=" + type + ", " +"]";
+	}
+
+	private String no;
     private String id;
     private String password;
     private String rrn;
@@ -13,13 +19,11 @@ public class Member implements Serializable {
     private String phone;
     private String type;
 
-    private int itemStart;
-    private int itemSizePerPage;
 
     public Member() {
     }
 
-    public Member(String no, String id, String password, String rrn, String name, String email, String phone, String type, int itemStart, int itemSizePerPage) {
+    public Member(String no, String id, String password, String rrn, String name, String email, String phone, String type) {
         this.no = no;
         this.id = id;
         this.password = password;
@@ -29,8 +33,6 @@ public class Member implements Serializable {
         this.phone = phone;
         this.type = type;
 
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
     }
 
     public void setNo(String no) {
@@ -97,19 +99,4 @@ public class Member implements Serializable {
         return this.type;
     }
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
-
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
 }

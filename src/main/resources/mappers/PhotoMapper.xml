@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.PhotoMapper">
-    <resultMap id="photoResultMap" type="kr.co.fos.Photo">
+<mapper namespace="kr.co.fos.photo.PhotoMapper">
+    <resultMap id="photoResultMap" type="kr.co.fos.photo.Photo">
         <result column="NO" property="no" />
         <result column="TYPE_NUMBER" property="typeNumber" />
         <result column="PHYSICAL_NAME" property="physicalName" />
@@ -36,13 +36,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Photo" resultType="int">
+    <select id="count" parameterType="kr.co.fos.photo.Photo" resultType="int">
         SELECT COUNT(*)
         FROM photo
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Photo" resultMap="photoResultMap">
+    <select id="list" parameterType="kr.co.fos.photo.Photo" resultMap="photoResultMap">
         SELECT *
         FROM (
             SELECT
@@ -63,7 +63,7 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Photo" resultMap="photoResultMap">
+    <select id="select" parameterType="kr.co.fos.photo.Photo" resultMap="photoResultMap">
         SELECT
             NO,
             TYPE_NUMBER,
@@ -75,7 +75,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Photo">
+    <insert id="insert" parameterType="kr.co.fos.photo.Photo">
         INSERT INTO photo (
             NO,
             TYPE_NUMBER,
@@ -93,7 +93,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Photo">
+    <update id="update" parameterType="kr.co.fos.photo.Photo">
         UPDATE photo
         <set>
             <if test="no != ''">
@@ -117,7 +117,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Photo">
+    <delete id="delete" parameterType="kr.co.fos.photo.Photo">
         DELETE FROM photo
         <include refid="whereSql" />
     </delete>

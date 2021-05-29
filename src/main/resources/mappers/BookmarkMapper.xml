@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.BookmarkMapper">
-    <resultMap id="bookmarkResultMap" type="kr.co.fos.Bookmark">
+<mapper namespace="kr.co.fos.bookmark.BookmarkMapper">
+    <resultMap id="bookmarkResultMap" type="kr.co.fos.bookmark.Bookmark">
         <result column="NO" property="no" />
         <result column="MEMBER_NO" property="memberNo" />
         <result column="FOODTRUCK_NO" property="foodtruckNo" />
@@ -24,13 +24,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Bookmark" resultType="int">
+    <select id="count" parameterType="kr.co.fos.bookmark.Bookmark" resultType="int">
         SELECT COUNT(*)
         FROM bookmark
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Bookmark" resultMap="bookmarkResultMap">
+    <select id="list" parameterType="kr.co.fos.bookmark.Bookmark" resultMap="bookmarkResultMap">
         SELECT *
         FROM (
             SELECT
@@ -48,7 +48,7 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Bookmark" resultMap="bookmarkResultMap">
+    <select id="select" parameterType="kr.co.fos.bookmark.Bookmark" resultMap="bookmarkResultMap">
         SELECT
             NO,
             MEMBER_NO,
@@ -57,7 +57,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Bookmark">
+    <insert id="insert" parameterType="kr.co.fos.bookmark.Bookmark">
         INSERT INTO bookmark (
             NO,
             MEMBER_NO,
@@ -69,7 +69,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Bookmark">
+    <update id="update" parameterType="kr.co.fos.bookmark.Bookmark">
         UPDATE bookmark
         <set>
             <if test="no != ''">
@@ -84,7 +84,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Bookmark">
+    <delete id="delete" parameterType="kr.co.fos.bookmark.Bookmark">
         DELETE FROM bookmark
         <include refid="whereSql" />
     </delete>

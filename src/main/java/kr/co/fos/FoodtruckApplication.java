@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@MapperScan("co.kr.fos")
-@ComponentScan(basePackages= {"co.kr.fos"})
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
+@ComponentScan(basePackages = { "kr.co.fos" })
+@MapperScan(basePackages = "kr.co.fos")
 public class FoodtruckApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FoodtruckApplication.class, args);

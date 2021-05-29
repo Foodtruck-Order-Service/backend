@@ -2,6 +2,8 @@ package kr.co.fos.photo;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 public interface PhotoMapper {
     public int count(Photo photo) throws Exception;
     public List<Photo> list(Photo photo) throws Exception;

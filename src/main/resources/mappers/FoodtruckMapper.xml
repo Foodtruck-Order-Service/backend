@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.FoodtruckMapper">
-    <resultMap id="foodtruckResultMap" type="kr.co.fos.Foodtruck">
+<mapper namespace="kr.co.fos.foodtruck.FoodtruckMapper">
+    <resultMap id="foodtruckResultMap" type="kr.co.fos.foodtruck.Foodtruck">
         <result column="NO" property="no" />
         <result column="MEMBER_NO" property="memberNo" />
         <result column="BRN" property="brn" />
@@ -60,13 +60,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Foodtruck" resultType="int">
+    <select id="count" parameterType="kr.co.fos.foodtruck.Foodtruck" resultType="int">
         SELECT COUNT(*)
         FROM foodtruck
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Foodtruck" resultMap="foodtruckResultMap">
+    <select id="list" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
         SELECT *
         FROM (
             SELECT
@@ -93,7 +93,7 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Foodtruck" resultMap="foodtruckResultMap">
+    <select id="select" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
         SELECT
             NO,
             MEMBER_NO,
@@ -111,7 +111,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Foodtruck">
+    <insert id="insert" parameterType="kr.co.fos.foodtruck.Foodtruck">
         INSERT INTO foodtruck (
             NO,
             MEMBER_NO,
@@ -141,7 +141,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Foodtruck">
+    <update id="update" parameterType="kr.co.fos.foodtruck.Foodtruck">
         UPDATE foodtruck
         <set>
             <if test="no != ''">
@@ -183,7 +183,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Foodtruck">
+    <delete id="delete" parameterType="kr.co.fos.foodtruck.Foodtruck">
         DELETE FROM foodtruck
         <include refid="whereSql" />
     </delete>
