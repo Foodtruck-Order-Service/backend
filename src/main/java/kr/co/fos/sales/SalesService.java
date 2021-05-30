@@ -1,8 +1,9 @@
 package kr.co.fos.sales;
 
-import java.util.Date;
-import java.util.Map;
+import java.util.List;
+
+import kr.co.fos.order.Order;
 
 public interface SalesService {
-	public Map<String, Integer> salesInquiry(int no, Date start, Date end);
+	public List<Order> salesInquiry(Order order);
 }
