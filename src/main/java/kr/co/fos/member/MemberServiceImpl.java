@@ -13,8 +13,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean memberRegister(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			MemberMapper.insert(member);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

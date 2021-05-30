@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,14 +20,15 @@ public class MemberController {
 	private MemberServiceImpl memberServiceImpl;
 	
 	@PostMapping
-	public ResponseEntity<Object> doMemberRegister(Member member) {
-		return null;
+	public ResponseEntity<Object> doMemberRegister(@RequestBody Member member) {
+		boolean result = memberServiceImpl.memberRegister(member);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@GetMapping
 	public ResponseEntity<Object> doMemberListInquiry(Member member) {
 		List<Member> memberList = memberServiceImpl.memberListInquiry(member);
-		System.out.println("ASDA" + memberList);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(memberList);
 	}

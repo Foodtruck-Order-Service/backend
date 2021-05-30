@@ -53,7 +53,7 @@
 
     <select id="list" parameterType="kr.co.fos.member.Member" resultMap="memberResultMap">
         SELECT *
-        FROM FOS.MEMBER
+        FROM member
         <!-- WHERE ID = #{id} AND PASSWORD = #{password}-->
         <include refid="whereSql" />
    
@@ -75,7 +75,6 @@
 
     <insert id="insert" parameterType="kr.co.fos.member.Member">
         INSERT INTO member (
-            NO,
             ID,
             PASSWORD,
             RRN,
@@ -84,7 +83,6 @@
             PHONE,
             TYPE
         ) VALUES (
-            #{no},
             #{id},
             #{password},
             #{rrn},
