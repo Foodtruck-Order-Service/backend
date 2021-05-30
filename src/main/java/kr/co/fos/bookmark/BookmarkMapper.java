@@ -2,8 +2,6 @@ package kr.co.fos.bookmark;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 public interface BookmarkMapper {
     public int count(Bookmark bookmark) throws Exception;
     public List<Bookmark> list(Bookmark bookmark) throws Exception;

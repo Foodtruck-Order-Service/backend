@@ -1,4 +1,4 @@
-package kr.co.fos.menu;
+package kr.co.fos.order;
 
 import java.sql.Date;
 import java.io.Serializable;

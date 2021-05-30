@@ -86,6 +86,7 @@
 
     <delete id="delete" parameterType="kr.co.fos.bookmark.Bookmark">
         DELETE FROM bookmark
+       
         <include refid="whereSql" />
     </delete>
 </mapper>

@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.menu.MenuDetailMapper">
-    <resultMap id="menuDetailResultMap" type="kr.co.fos.menu.MenuDetail">
+<mapper namespace="kr.co.fos.order.MenuDetailMapper">
+    <resultMap id="menuDetailResultMap" type="kr.co.fos.order.MenuDetail">
         <result column="NO" property="no" />
         <result column="ORDER_INFO_NO" property="orderInfoNo" />
         <result column="OPTION_NAME" property="optionName" />
@@ -32,13 +32,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.menu.MenuDetail" resultType="int">
+    <select id="count" parameterType="kr.co.fos.order.MenuDetail" resultType="int">
         SELECT COUNT(*)
         FROM menu_detail
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.menu.MenuDetail" resultMap="menuDetailResultMap">
+    <select id="list" parameterType="kr.co.fos.order.MenuDetail" resultMap="menuDetailResultMap">
         SELECT *
         FROM (
             SELECT
@@ -57,8 +57,7 @@
             </if>
         </where>
     </select>
-
-    <select id="select" parameterType="kr.co.fos.menu.MenuDetail" resultMap="menuDetailResultMap">
+    <select id="select" parameterType="kr.co.fos.order.MenuDetail" resultMap="menuDetailResultMap">
         SELECT
             NO,
             ORDER_INFO_NO,
@@ -68,8 +67,7 @@
         FROM menu_detail
         <include refid="whereSql" />
     </select>
-
-    <insert id="insert" parameterType="kr.co.fos.menu.MenuDetail">
+    <insert id="insert" parameterType="kr.co.fos.order.MenuDetail">
         INSERT INTO menu_detail (
             NO,
             ORDER_INFO_NO,
@@ -85,7 +83,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.menu.MenuDetail">
+    <update id="update" parameterType="kr.co.fos.order.MenuDetail">
         UPDATE menu_detail
         <set>
             <if test="no != ''">
@@ -106,7 +104,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.menu.MenuDetail">
+    <delete id="delete" parameterType="kr.co.fos.order.MenuDetail">
         DELETE FROM menu_detail
         <include refid="whereSql" />
     </delete>

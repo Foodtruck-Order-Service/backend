@@ -2,8 +2,6 @@ package kr.co.fos.review;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 public interface ReviewMapper {
     public int count(Review review) throws Exception;
     public List<Review> list(Review review) throws Exception;

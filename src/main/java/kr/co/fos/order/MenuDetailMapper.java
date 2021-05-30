@@ -1,4 +1,4 @@
-package kr.co.fos.menu;
+package kr.co.fos.order;
 
 import java.util.List;
 
