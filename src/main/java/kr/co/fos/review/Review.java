@@ -4,92 +4,80 @@ import java.sql.Date;
 import java.io.Serializable;
 
 public class Review implements Serializable {
-    private String no;
-    private String memberNo;
-    private String foodtruckNo;
+    private int no;
+    private int memberNo;
+    private int foodtruckNo;
     private String grade;
     private String content;
-    private Date registDate;
-
-    private int itemStart;
-    private int itemSizePerPage;
+    private String registDate;
+    private String id;
 
     public Review() {
     }
 
-    public Review(String no, String memberNo, String foodtruckNo, String grade, String content, Date registDate, int itemStart, int itemSizePerPage) {
+    public Review(int no, int memberNo, int foodtruckNo, String grade, String content, String registDate, String id) {
         this.no = no;
         this.memberNo = memberNo;
         this.foodtruckNo = foodtruckNo;
         this.grade = grade;
         this.content = content;
         this.registDate = registDate;
-
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
+        this.id = id;
     }
 
-    public void setNo(String no) {
-        this.no = no;
-    }
+	public int getNo() {
+		return no;
+	}
 
-    public String getNo() {
-        return this.no;
-    }
+	public void setNo(int no) {
+		this.no = no;
+	}
 
-    public void setMemberNo(String memberNo) {
-        this.memberNo = memberNo;
-    }
+	public int getMemberNo() {
+		return memberNo;
+	}
 
-    public String getMemberNo() {
-        return this.memberNo;
-    }
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
-    public void setFoodtruckNo(String foodtruckNo) {
-        this.foodtruckNo = foodtruckNo;
-    }
+	public int getFoodtruckNo() {
+		return foodtruckNo;
+	}
 
-    public String getFoodtruckNo() {
-        return this.foodtruckNo;
-    }
+	public void setFoodtruckNo(int foodtruckNo) {
+		this.foodtruckNo = foodtruckNo;
+	}
 
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
+	public String getGrade() {
+		return grade;
+	}
 
-    public String getGrade() {
-        return this.grade;
-    }
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public String getContent() {
-        return this.content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setRegistDate(Date registDate) {
-        this.registDate = registDate;
-    }
+	public String getRegistDate() {
+		return registDate;
+	}
 
-    public Date getRegistDate() {
-        return this.registDate;
-    }
+	public void setRegistDate(String registDate) {
+		this.registDate = registDate;
+	}
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 }

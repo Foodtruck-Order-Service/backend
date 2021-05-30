@@ -1,6 +1,5 @@
 package kr.co.fos.bookmark;
 
-import java.sql.Date;
 import java.io.Serializable;
 
 public class Bookmark implements Serializable {
