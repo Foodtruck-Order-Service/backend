@@ -1,7 +1,8 @@
 package kr.co.fos.member;
 
-import java.sql.Date;
 import java.io.Serializable;
+
+import kr.co.fos.foodtruck.Foodtruck;
 
 public class Member implements Serializable {
     @Override
@@ -18,22 +19,24 @@ public class Member implements Serializable {
     private String email;
     private String phone;
     private String type;
+    private Foodtruck foodtruck;
 
-
-    public Member() {
+	public Member() {
     }
-
-    public Member(String no, String id, String password, String rrn, String name, String email, String phone, String type) {
-        this.no = no;
-        this.id = id;
-        this.password = password;
-        this.rrn = rrn;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.type = type;
-
-    }
+	
+    public Member(String no, String id, String password, String rrn, String name, String email, String phone,
+			String type, Foodtruck foodtruck) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.password = password;
+		this.rrn = rrn;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.type = type;
+		this.foodtruck = foodtruck;
+	}
 
     public void setNo(String no) {
         this.no = no;
@@ -99,4 +102,12 @@ public class Member implements Serializable {
         return this.type;
     }
 
+    public Foodtruck getFoodtruck() {
+		return foodtruck;
+	}
+
+	public void setFoodtruck(Foodtruck foodtruck) {
+		this.foodtruck = foodtruck;
+	}
+    
 }

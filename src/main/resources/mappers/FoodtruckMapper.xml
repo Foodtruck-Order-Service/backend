@@ -60,11 +60,6 @@
         </where>
     </sql>
 
-<<<<<<< HEAD
-    <select id="count" parameterType="kr.co.fos.foodtruck.Foodtruck" resultType="int">
-        SELECT COUNT(*)
-        FROM foodtruck
-=======
 	<sql id="whereSearchSql">
         <where>
             <if test="no != null and no != ''">
@@ -109,37 +104,10 @@
     <select id="count" parameterType="kr.co.fos.foodtruck.Foodtruck" resultType="int">
         SELECT COUNT(*)
         FROM FOODTRUCK
->>>>>>> kim
         <include refid="whereSql" />
     </select>
 
     <select id="list" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
-<<<<<<< HEAD
-        SELECT *
-        FROM (
-            SELECT
-                NO,
-                MEMBER_NO,
-                BRN,
-                NAME,
-                CATEGORY,
-                START_TIME,
-                END_TIME,
-                CONTENT,
-                LAT,
-                LNG,
-                APPROVAL,
-                STATUS
-            FROM foodtruck
-            <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
-=======
 	    SELECT
 	        NO,
 	        MEMBER_NO,
@@ -155,7 +123,6 @@
 	        STATUS
 	    FROM FOS.FOODTRUCK
 	    <include refid="whereSearchSql" />
->>>>>>> kim
     </select>
 
     <select id="select" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
