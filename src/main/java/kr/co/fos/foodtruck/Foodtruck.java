@@ -12,8 +12,8 @@ public class Foodtruck implements Serializable {
     private String startTime;
     private String endTime;
     private String content;
-    private int lat;
-    private int lng;
+    private double lat;
+    private double lng;
     private String approval;
     private String status;
 
@@ -23,7 +23,7 @@ public class Foodtruck implements Serializable {
     public Foodtruck() {
     }
 
-    public Foodtruck(String no, String memberNo, String brn, String name, String category, String startTime, String endTime, String content, int lat, int lng, String approval, String status, int itemStart, int itemSizePerPage) {
+    public Foodtruck(String no, String memberNo, String brn, String name, String category, String startTime, String endTime, String content, double lat, double lng, String approval, String status, int itemStart, int itemSizePerPage) {
         this.no = no;
         this.memberNo = memberNo;
         this.brn = brn;
@@ -105,19 +105,19 @@ public class Foodtruck implements Serializable {
         return this.content;
     }
 
-    public void setLat(int lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public int getLat() {
+    public double getLat() {
         return this.lat;
     }
 
-    public void setLng(int lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 
-    public int getLng() {
+    public double getLng() {
         return this.lng;
     }
 

@@ -60,13 +60,61 @@
         </where>
     </sql>
 
+<<<<<<< HEAD
     <select id="count" parameterType="kr.co.fos.foodtruck.Foodtruck" resultType="int">
         SELECT COUNT(*)
         FROM foodtruck
+=======
+	<sql id="whereSearchSql">
+        <where>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="memberNo != null and memberNo != ''">
+                AND MEMBER_NO = #{memberNo}
+            </if>
+            <if test="brn != null and brn != ''">
+                AND BRN = #{brn}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME LIKE '%${ name }%'
+            </if>
+            <if test="category != null and category != ''">
+                AND CATEGORY = #{category}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                AND START_TIME = #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                AND END_TIME = #{endTime}
+            </if>
+            <if test="content != null and content != ''">
+                AND CONTENT = #{content}
+            </if>
+            <if test="lat > 0">
+                AND LAT = #{lat}
+            </if>
+            <if test="lng > 0">
+                AND LNG = #{lng}
+            </if>
+            <if test="approval != null and approval != ''">
+                AND APPROVAL = #{approval}
+            </if>
+            <if test="status != null and status != ''">
+                AND STATUS = #{status}
+            </if>
+        </where>
+    </sql>
+	
+    <select id="count" parameterType="kr.co.fos.foodtruck.Foodtruck" resultType="int">
+        SELECT COUNT(*)
+        FROM FOODTRUCK
+>>>>>>> kim
         <include refid="whereSql" />
     </select>
 
     <select id="list" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
+<<<<<<< HEAD
         SELECT *
         FROM (
             SELECT
@@ -91,6 +139,23 @@
                        AND (#{itemStart} + #{itemSizePerPage})
             </if>
         </where>
+=======
+	    SELECT
+	        NO,
+	        MEMBER_NO,
+	        BRN,
+	        NAME,
+	        CATEGORY,
+	        START_TIME,
+	        END_TIME,
+	        CONTENT,
+	        LAT,
+	        LNG,
+	        APPROVAL,
+	        STATUS
+	    FROM FOS.FOODTRUCK
+	    <include refid="whereSearchSql" />
+>>>>>>> kim
     </select>
 
     <select id="select" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
