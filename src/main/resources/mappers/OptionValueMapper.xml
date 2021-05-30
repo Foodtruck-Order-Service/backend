@@ -3,11 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.MenuDetailMapper">
-    <resultMap id="menuDetailResultMap" type="kr.co.fos.MenuDetail">
+<mapper namespace="kr.co.fos.menu.OptionValueMapper">
+    <resultMap id="optionValueResultMap" type="kr.co.fos.menu.OptionValue">
         <result column="NO" property="no" />
-        <result column="ORDER_INFO_NO" property="orderInfoNo" />
-        <result column="OPTION_NAME" property="optionName" />
+        <result column="OPTION_NO" property="optionNo" />
         <result column="OPTION_VALUE" property="optionValue" />
         <result column="ADD_AMOUNT" property="addAmount" />
     </resultMap>
@@ -17,11 +16,8 @@
             <if test="no != null and no != ''">
                 AND NO = #{no}
             </if>
-            <if test="orderInfoNo != null and orderInfoNo != ''">
-                AND ORDER_INFO_NO = #{orderInfoNo}
-            </if>
-            <if test="optionName != null and optionName != ''">
-                AND OPTION_NAME = #{optionName}
+            <if test="optionNo != null and optionNo != ''">
+                AND OPTION_NO = #{optionNo}
             </if>
             <if test="optionValue != null and optionValue != ''">
                 AND OPTION_VALUE = #{optionValue}
@@ -32,22 +28,21 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.MenuDetail" resultType="int">
+    <select id="count" parameterType="kr.co.fos.menu.OptionValue" resultType="int">
         SELECT COUNT(*)
-        FROM menu_detail
+        FROM option_value
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.MenuDetail" resultMap="menuDetailResultMap">
+    <select id="list" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">
         SELECT *
         FROM (
             SELECT
                 NO,
-                ORDER_INFO_NO,
-                OPTION_NAME,
+                OPTION_NO,
                 OPTION_VALUE,
                 ADD_AMOUNT
-            FROM menu_detail
+            FROM option_value
             <include refid="whereSql" />
         ) TB
         <where>
@@ -58,44 +53,38 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.MenuDetail" resultMap="menuDetailResultMap">
+    <select id="select" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">
         SELECT
             NO,
-            ORDER_INFO_NO,
-            OPTION_NAME,
+            OPTION_NO,
             OPTION_VALUE,
             ADD_AMOUNT
-        FROM menu_detail
+        FROM option_value
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.MenuDetail">
-        INSERT INTO menu_detail (
+    <insert id="insert" parameterType="kr.co.fos.menu.OptionValue">
+        INSERT INTO option_value (
             NO,
-            ORDER_INFO_NO,
-            OPTION_NAME,
+            OPTION_NO,
             OPTION_VALUE,
             ADD_AMOUNT
         ) VALUES (
             #{no},
-            #{orderInfoNo},
-            #{optionName},
+            #{optionNo},
             #{optionValue},
             #{addAmount}
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.MenuDetail">
-        UPDATE menu_detail
+    <update id="update" parameterType="kr.co.fos.menu.OptionValue">
+        UPDATE option_value
         <set>
             <if test="no != ''">
                 NO = #{no},
             </if>
-            <if test="orderInfoNo != ''">
-                ORDER_INFO_NO = #{orderInfoNo},
-            </if>
-            <if test="optionName != ''">
-                OPTION_NAME = #{optionName},
+            <if test="optionNo != ''">
+                OPTION_NO = #{optionNo},
             </if>
             <if test="optionValue != ''">
                 OPTION_VALUE = #{optionValue},
@@ -106,8 +95,8 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.MenuDetail">
-        DELETE FROM menu_detail
+    <delete id="delete" parameterType="kr.co.fos.menu.OptionValue">
+        DELETE FROM option_value
         <include refid="whereSql" />
     </delete>
 </mapper>

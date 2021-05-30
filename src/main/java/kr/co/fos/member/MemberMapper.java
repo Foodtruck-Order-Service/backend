@@ -2,6 +2,9 @@ package kr.co.fos.member;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+@Repository
 public interface MemberMapper {
     public int count(Member member) throws Exception;
     public List<Member> list(Member member) throws Exception;

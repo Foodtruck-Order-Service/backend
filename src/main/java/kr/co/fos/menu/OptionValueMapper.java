@@ -2,6 +2,8 @@ package kr.co.fos.menu;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 public interface OptionValueMapper {
     public int count(OptionValue optionValue) throws Exception;
     public List<OptionValue> list(OptionValue optionValue) throws Exception;

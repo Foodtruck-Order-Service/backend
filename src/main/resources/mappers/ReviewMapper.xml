@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.ReviewMapper">
-    <resultMap id="reviewResultMap" type="kr.co.fos.Review">
+<mapper namespace="kr.co.fos.review.ReviewMapper">
+    <resultMap id="reviewResultMap" type="kr.co.fos.review.Review">
         <result column="NO" property="no" />
         <result column="MEMBER_NO" property="memberNo" />
         <result column="FOODTRUCK_NO" property="foodtruckNo" />
@@ -36,13 +36,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Review" resultType="int">
+    <select id="count" parameterType="kr.co.fos.review.Review" resultType="int">
         SELECT COUNT(*)
         FROM review
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Review" resultMap="reviewResultMap">
+    <select id="list" parameterType="kr.co.fos.review.Review" resultMap="reviewResultMap">
         SELECT *
         FROM (
             SELECT
@@ -63,7 +63,7 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Review" resultMap="reviewResultMap">
+    <select id="select" parameterType="kr.co.fos.review.Review" resultMap="reviewResultMap">
         SELECT
             NO,
             MEMBER_NO,
@@ -75,7 +75,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Review">
+    <insert id="insert" parameterType="kr.co.fos.review.Review">
         INSERT INTO review (
             NO,
             MEMBER_NO,
@@ -93,7 +93,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Review">
+    <update id="update" parameterType="kr.co.fos.review.Review">
         UPDATE review
         <set>
             <if test="no != ''">
@@ -117,7 +117,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Review">
+    <delete id="delete" parameterType="kr.co.fos.review.Review">
         DELETE FROM review
         <include refid="whereSql" />
     </delete>

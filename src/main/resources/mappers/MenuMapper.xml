@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.fos.MenuMapper">
-    <resultMap id="menuResultMap" type="kr.co.fos.Menu">
+<mapper namespace="kr.co.fos.menu.MenuMapper">
+    <resultMap id="menuResultMap" type="kr.co.fos.menu.Menu">
         <result column="NO" property="no" />
         <result column="FOODTRUCK_NO" property="foodtruckNo" />
         <result column="NAME" property="name" />
@@ -36,13 +36,13 @@
         </where>
     </sql>
 
-    <select id="count" parameterType="kr.co.fos.Menu" resultType="int">
+    <select id="count" parameterType="kr.co.fos.menu.Menu" resultType="int">
         SELECT COUNT(*)
         FROM menu
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.Menu" resultMap="menuResultMap">
+    <select id="list" parameterType="kr.co.fos.menu.Menu" resultMap="menuResultMap">
         SELECT *
         FROM (
             SELECT
@@ -63,7 +63,7 @@
         </where>
     </select>
 
-    <select id="select" parameterType="kr.co.fos.Menu" resultMap="menuResultMap">
+    <select id="select" parameterType="kr.co.fos.menu.Menu" resultMap="menuResultMap">
         SELECT
             NO,
             FOODTRUCK_NO,
@@ -75,7 +75,7 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.Menu">
+    <insert id="insert" parameterType="kr.co.fos.menu.Menu">
         INSERT INTO menu (
             NO,
             FOODTRUCK_NO,
@@ -93,7 +93,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="kr.co.fos.Menu">
+    <update id="update" parameterType="kr.co.fos.menu.Menu">
         UPDATE menu
         <set>
             <if test="no != ''">
@@ -117,7 +117,7 @@
         </set>
     </update>
 
-    <delete id="delete" parameterType="kr.co.fos.Menu">
+    <delete id="delete" parameterType="kr.co.fos.menu.Menu">
         DELETE FROM menu
         <include refid="whereSql" />
     </delete>
