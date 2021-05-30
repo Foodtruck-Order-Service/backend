@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.fos.menu.OptionValueMapper">
+    <resultMap id="optionValueResultMap" type="kr.co.fos.menu.OptionValue">
+        <result column="NO" property="no" />
+        <result column="OPTION_NO" property="optionNo" />
+        <result column="OPTION_VALUE" property="optionValue" />
+        <result column="ADD_AMOUNT" property="addAmount" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="optionNo != null and optionNo != ''">
+                AND OPTION_NO = #{optionNo}
+            </if>
+            <if test="optionValue != null and optionValue != ''">
+                AND OPTION_VALUE = #{optionValue}
+            </if>
+            <if test="addAmount != null and addAmount != ''">
+                AND ADD_AMOUNT = #{addAmount}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" parameterType="kr.co.fos.menu.OptionValue" resultType="int">
+        SELECT COUNT(*)
+        FROM option_value
+        <include refid="whereSql" />
+    </select>
+
+    <select id="list" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">
+        SELECT *
+        FROM (
+            SELECT
+                NO,
+                OPTION_NO,
+                OPTION_VALUE,
+                ADD_AMOUNT
+            FROM option_value
+            <include refid="whereSql" />
+        ) TB
+        <where>
+            <if test="itemStart > -1">
+                RN BETWEEN (#{itemStart} + 1)
+                       AND (#{itemStart} + #{itemSizePerPage})
+            </if>
+        </where>
+    </select>
+
+    <select id="select" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">
+        SELECT
+            NO,
+            OPTION_NO,
+            OPTION_VALUE,
+            ADD_AMOUNT
+        FROM option_value
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="kr.co.fos.menu.OptionValue">
+        INSERT INTO option_value (
+            NO,
+            OPTION_NO,
+            OPTION_VALUE,
+            ADD_AMOUNT
+        ) VALUES (
+            #{no},
+            #{optionNo},
+            #{optionValue},
+            #{addAmount}
+        )
+    </insert>
+
+    <update id="update" parameterType="kr.co.fos.menu.OptionValue">
+        UPDATE option_value
+        <set>
+            <if test="no != ''">
+                NO = #{no},
+            </if>
+            <if test="optionNo != ''">
+                OPTION_NO = #{optionNo},
+            </if>
+            <if test="optionValue != ''">
+                OPTION_VALUE = #{optionValue},
+            </if>
+            <if test="addAmount != ''">
+                ADD_AMOUNT = #{addAmount},
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="kr.co.fos.menu.OptionValue">
+        DELETE FROM option_value
+        <include refid="whereSql" />
+    </delete>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.fos.member.MemberMapper">
+    <resultMap id="memberResultMap" type="kr.co.fos.member.Member">
+        <result column="NO" property="no" />
+        <result column="ID" property="id" />
+        <result column="PASSWORD" property="password" />
+        <result column="RRN" property="rrn" />
+        <result column="NAME" property="name" />
+        <result column="EMAIL" property="email" />
+        <result column="PHONE" property="phone" />
+        <result column="TYPE" property="type" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="id != null and id != ''">
+                AND ID = #{id}
+            </if>
+            <if test="password != null and password != ''">
+                AND PASSWORD = #{password}
+            </if>
+            <if test="rrn != null and rrn != ''">
+                AND RRN = #{rrn}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME = #{name}
+            </if>
+            <if test="email != null and email != ''">
+                AND EMAIL = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                AND PHONE = #{phone}
+            </if>
+            <if test="type != null and type != ''">
+                AND TYPE = #{type}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" parameterType="kr.co.fos.member.Member" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        <include refid="whereSql" />
+    </select>
+
+    <select id="list" parameterType="kr.co.fos.member.Member" resultMap="memberResultMap">
+        SELECT *
+        FROM (
+            SELECT
+                NO,
+                ID,
+                PASSWORD,
+                RRN,
+                NAME,
+                EMAIL,
+                PHONE,
+                TYPE
+            FROM member
+            <include refid="whereSql" />
+        ) TB
+        <where>
+            <if test="itemStart > -1">
+                RN BETWEEN (#{itemStart} + 1)
+                       AND (#{itemStart} + #{itemSizePerPage})
+            </if>
+        </where>
+    </select>
+
+    <select id="select" parameterType="kr.co.fos.member.Member" resultMap="memberResultMap">
+        SELECT
+            NO,
+            ID,
+            PASSWORD,
+            RRN,
+            NAME,
+            EMAIL,
+            PHONE,
+            TYPE
+        FROM member
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="kr.co.fos.member.Member">
+        INSERT INTO member (
+            NO,
+            ID,
+            PASSWORD,
+            RRN,
+            NAME,
+            EMAIL,
+            PHONE,
+            TYPE
+        ) VALUES (
+            #{no},
+            #{id},
+            #{password},
+            #{rrn},
+            #{name},
+            #{email},
+            #{phone},
+            #{type}
+        )
+    </insert>
+
+    <update id="update" parameterType="kr.co.fos.member.Member">
+        UPDATE member
+        <set>
+            <if test="no != ''">
+                NO = #{no},
+            </if>
+            <if test="id != ''">
+                ID = #{id},
+            </if>
+            <if test="password != ''">
+                PASSWORD = #{password},
+            </if>
+            <if test="rrn != ''">
+                RRN = #{rrn},
+            </if>
+            <if test="name != ''">
+                NAME = #{name},
+            </if>
+            <if test="email != ''">
+                EMAIL = #{email},
+            </if>
+            <if test="phone != ''">
+                PHONE = #{phone},
+            </if>
+            <if test="type != ''">
+                TYPE = #{type},
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="kr.co.fos.member.Member">
+        DELETE FROM member
+        <include refid="whereSql" />
+    </delete>
+</mapper>
