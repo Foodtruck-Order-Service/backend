@@ -54,8 +54,14 @@ public class FoodtruckServiceImple implements FoodtruckService {
 
 	@Override
 	public boolean foodtruckDelete(Foodtruck foodtruck) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			foodtruckMapper.delete(foodtruck);
+			result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
