@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
-	@Autowired private MemberMapper MemberMapper;
+	@Autowired private MemberMapper memberMapper;
 	 
 
 	@Override
 	public boolean memberRegister(Member member) {
 		boolean result = false;
 		try {
-			MemberMapper.insert(member);
+			memberMapper.insert(member);
 			result = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 
 		List<Member> memberList = null;
 		try {
-			memberList = MemberMapper.list(member);
+			memberList = memberMapper.list(member);
 			
 		} catch (Exception e) { // TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,20 +39,41 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member memberDetailInquiry(Member member) {
-		// TODO Auto-generated method stub
-		return null;
+		Member memberData = null;
+		try {
+			memberData = memberMapper.select(member);
+			
+		} catch (Exception e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return memberData;
 	}
 
 	@Override
 	public boolean memberUpdate(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			memberMapper.update(member);
+			result = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
 	public boolean memberDelete(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			memberMapper.delete(member);
+			result = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

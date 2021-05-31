@@ -96,31 +96,29 @@
     <update id="update" parameterType="kr.co.fos.member.Member">
         UPDATE member
         <set>
-            <if test="no != ''">
-                NO = #{no},
-            </if>
-            <if test="id != ''">
+            <if test="id != null">
                 ID = #{id},
             </if>
-            <if test="password != ''">
+            <if test="password != null">
                 PASSWORD = #{password},
             </if>
-            <if test="rrn != ''">
+            <if test="rrn != null">
                 RRN = #{rrn},
             </if>
-            <if test="name != ''">
+            <if test="name != null">
                 NAME = #{name},
             </if>
-            <if test="email != ''">
+            <if test="email != null">
                 EMAIL = #{email},
             </if>
-            <if test="phone != ''">
+            <if test="phone != null">
                 PHONE = #{phone},
             </if>
-            <if test="type != ''">
+            <if test="type != null">
                 TYPE = #{type},
             </if>
         </set>
+        where NO = #{no}
     </update>
 
     <delete id="delete" parameterType="kr.co.fos.member.Member">
