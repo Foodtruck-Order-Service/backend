@@ -31,21 +31,12 @@
     </select>
 
     <select id="list" parameterType="kr.co.fos.menu.Option" resultMap="optionResultMap">
-        SELECT *
-        FROM (
             SELECT
                 NO,
                 MENU_NO,
                 OPTION_NAME
             FROM option
             <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
     </select>
 
     <select id="select" parameterType="kr.co.fos.menu.Option" resultMap="optionResultMap">
