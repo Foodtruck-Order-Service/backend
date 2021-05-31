@@ -3,61 +3,46 @@ package kr.co.fos.bookmark;
 import java.io.Serializable;
 
 public class Bookmark implements Serializable {
-    private String no;
-    private String memberNo;
-    private String foodtruckNo;
-    
-    private int itemStart;
-    private int itemSizePerPage;
+    private int no;
+    private int memberNo;
+    private int foodtruckNo;
+   
     public Bookmark() {
     }
 
-    public Bookmark(String no, String memberNo, String foodtruckNo, int itemStart, int itemSizePerPage) {
+    public Bookmark(int no, int memberNo, int foodtruckNo) {
         this.no = no;
         this.memberNo = memberNo;
         this.foodtruckNo = foodtruckNo;
 
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
     }
 
-    public void setNo(String no) {
+    public void setNo(int no) {
         this.no = no;
     }
 
-    public String getNo() {
+    public int getNo() {
         return this.no;
     }
 
-    public void setMemberNo(String memberNo) {
+    public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
     }
 
-    public String getMemberNo() {
+    public int getMemberNo() {
         return this.memberNo;
     }
 
-    public void setFoodtruckNo(String foodtruckNo) {
+    public void setFoodtruckNo(int foodtruckNo) {
         this.foodtruckNo = foodtruckNo;
     }
 
-    public String getFoodtruckNo() {
+    public int getFoodtruckNo() {
         return this.foodtruckNo;
     }
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
-
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
+	@Override
+	public String toString() {
+		return "Bookmark [no=" + no + ", memberNo=" + memberNo + ", foodtruckNo=" + foodtruckNo + "]";
+	}
 }

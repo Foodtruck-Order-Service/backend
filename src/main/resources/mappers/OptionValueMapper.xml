@@ -35,8 +35,6 @@
     </select>
 
     <select id="list" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">
-        SELECT *
-        FROM (
             SELECT
                 NO,
                 OPTION_NO,
@@ -44,13 +42,6 @@
                 ADD_AMOUNT
             FROM option_value
             <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
     </select>
 
     <select id="select" parameterType="kr.co.fos.menu.OptionValue" resultMap="optionValueResultMap">

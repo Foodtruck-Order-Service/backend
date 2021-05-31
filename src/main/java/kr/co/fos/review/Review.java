@@ -80,4 +80,10 @@ public class Review implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Review [no=" + no + ", memberNo=" + memberNo + ", foodtruckNo=" + foodtruckNo + ", grade=" + grade
+				+ ", content=" + content + ", registDate=" + registDate + ", id=" + id + "]";
+	}
 }
