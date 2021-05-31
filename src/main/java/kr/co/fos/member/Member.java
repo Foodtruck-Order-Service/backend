@@ -11,7 +11,7 @@ public class Member implements Serializable {
 				+ ", email=" + email + ", phone=" + phone + ", type=" + type + ", " +"]";
 	}
 
-	private String no;
+	private int no;
     private String id;
     private String password;
     private String rrn;
@@ -24,7 +24,7 @@ public class Member implements Serializable {
 	public Member() {
     }
 	
-    public Member(String no, String id, String password, String rrn, String name, String email, String phone,
+    public Member(int no, String id, String password, String rrn, String name, String email, String phone,
 			String type, Foodtruck foodtruck) {
 		super();
 		this.no = no;
@@ -38,11 +38,11 @@ public class Member implements Serializable {
 		this.foodtruck = foodtruck;
 	}
 
-    public void setNo(String no) {
+    public void setNo(int no) {
         this.no = no;
     }
 
-    public String getNo() {
+    public int getNo() {
         return this.no;
     }
 

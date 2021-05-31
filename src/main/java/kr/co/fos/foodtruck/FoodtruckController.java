@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.fos.member.Member;
 
@@ -21,23 +19,18 @@ import kr.co.fos.member.Member;
 @RequestMapping("/foodtruck")
 public class FoodtruckController {
 	@Autowired
-	private FoodtruckServiceImple foodtruckService;
+	private FoodtruckServiceImpl foodtruckService;
 	
 	@PostMapping
 	public ResponseEntity<Object> doFoodtruckRegister(@RequestBody Member member) {
+		boolean result = true;
+		result = foodtruckService.foodtruckRegister(member);
 		
-		// 1. memberServiece.memberRegister(member);
-		foodtruckService.foodtruckRegister(member.getFoodtruck());
-		
-		foodtruckService.foodtruckRegister(new Foodtruck());
-		
-		return ResponseEntity.status(HttpStatus.OK).body(member);
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@GetMapping
 	public ResponseEntity<Object> doFoodTruckListInquiry(Foodtruck foodtruck) {
-//		Foodtruck foodtruck = new Foodtruck();
-//		foodtruck.setName(name);
 		List<Foodtruck> list = foodtruckService.foodtruckListInquiry(foodtruck);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(list);
@@ -49,8 +42,10 @@ public class FoodtruckController {
 	}
 	
 	@PutMapping("/{no}")
-	public ResponseEntity<Object> doFoodTruckDeatilInquiry(Foodtruck foodtruck, @RequestParam MultipartFile attach) {
-		return null;
+	public ResponseEntity<Object> doFoodTruckUpdate(@RequestBody Foodtruck foodtruck) {
+		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(false);
 	}
 	
 	@DeleteMapping("/{no}")
@@ -59,7 +54,9 @@ public class FoodtruckController {
 	}
 	
 	@PostMapping("/{no}/location")
-	public ResponseEntity<Object> doFoodtruckLocationRegister(Foodtruck foodtruck) {
-		return null;
+	public ResponseEntity<Object> doFoodtruckLocationRegister(@RequestBody Foodtruck foodtruck) {
+		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(false);
 	}
 }

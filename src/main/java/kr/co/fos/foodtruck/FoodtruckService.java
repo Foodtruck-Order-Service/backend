@@ -2,10 +2,10 @@ package kr.co.fos.foodtruck;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
+import kr.co.fos.member.Member;
 
 public interface FoodtruckService {
-	public boolean foodtruckRegister(Foodtruck foodtruck);
+	public boolean foodtruckRegister(Member member);
 	public List<Foodtruck> foodtruckListInquiry(Foodtruck foodtruck);
 	public Foodtruck foodtruckDetailInquiry(int no);
 	public boolean foodtruckUpdate(Foodtruck foodtruck);
