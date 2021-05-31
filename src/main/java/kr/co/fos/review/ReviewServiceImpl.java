@@ -13,10 +13,36 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public boolean reviewRegister(Review review, MultipartFile attach) {
+		System.out.println("서비스 들어옴");
+		try {
+			reviewMapper.insert(review);
+			
+			return true;
+		} catch (Exception e) {
+		}
 		
 		return false;
 	}
-
+	
+	//리뷰 상세 조회
+	@Override
+	public Review reviewDetailInquiry(int no) {
+		System.out.println("서비스 들어옴");
+		
+		try {
+			Review review = new Review();
+			review.setNo(no);
+			System.out.println("서비스 에서 들어온 review 객체 : " + review);
+			review = reviewMapper.select(review);
+			
+			return review;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public List<Review> reviewListInquiry(int no) {
 		Review review = new Review();
@@ -34,7 +60,16 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public boolean reviewUpdate(int no, MultipartFile attach) {
+	public boolean reviewUpdate(Review review, MultipartFile attach) {
+		System.out.println("서비스 들어옴");
+		try {
+			reviewMapper.update(review);
+			
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
@@ -42,5 +77,4 @@ public class ReviewServiceImpl implements ReviewService {
 	public boolean reviewDelete(int no) {
 		return false;
 	}
-	
 }
