@@ -40,12 +40,7 @@
             FROM bookmark
             <include refid="whereSql" />
         ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
+        
     </select>
 
     <select id="select" parameterType="kr.co.fos.bookmark.Bookmark" resultMap="bookmarkResultMap">

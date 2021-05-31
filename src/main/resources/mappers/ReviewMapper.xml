@@ -11,10 +11,11 @@
         <result column="GRADE" property="grade" />
         <result column="CONTENT" property="content" />
         <result column="REGIST_DATE" property="registDate" />
+        <result column="ID" property="id" />
     </resultMap>
 
     <sql id="whereSql">
-        <where>
+        <where> 
             <if test="no != null and no != ''">
                 AND NO = #{no}
             </if>
@@ -30,8 +31,11 @@
             <if test="content != null and content != ''">
                 AND CONTENT = #{content}
             </if>
-            <if test="registDate != null and registDate != ''">
+           <!--  <if test="registDate != null and registDate != ''">
                 AND DATE_FORMAT(REGIST_DATE, '%Y-%m-%d %I:%i:%s') = DATE_FORMAT(#{registDate}, '%Y-%m-%d %I:%i:%s')
+            </if> -->
+            <if test="registDate != null and registDate != ''">
+                AND REGIST_DATE = #{registDate}
             </if>
         </where>
     </sql>
@@ -43,22 +47,35 @@
     </select>
 
     <select id="list" parameterType="kr.co.fos.review.Review" resultMap="reviewResultMap">
-        SELECT *
-        FROM (
-            SELECT
-                NO,
-                MEMBER_NO,
-                FOODTRUCK_NO,
-                GRADE,
-                CONTENT,
-                DATE_FORMAT(REGIST_DATE, '%Y-%m-%d %I:%i:%s')
-            FROM review
-            <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
+    	SELECT
+            R.NO NO,
+            R.MEMBER_NO MEMBER_NO,
+            M.ID ID,
+            R.FOODTRUCK_NO FOODTRUCK_NO,
+            R.GRADE GRADE,
+            R.CONTENT CONTENT,
+            R.REGIST_DATE REGIST_DATE
+        FROM REVIEW R, MEMBER M
+        <where> 
+        	R.MEMBER_NO = M.NO  
+            <if test="no != null and no != ''">
+                AND R.NO = #{no}
+            </if>
+            <if test="memberNo != null and memberNo != ''">
+                AND R.MEMBER_NO = #{memberNo}
+            </if>
+            <if test="foodtruckNo != null and foodtruckNo != ''">
+                AND R.FOODTRUCK_NO = #{foodtruckNo}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND R.GRADE = #{grade}
+            </if>
+            <if test="content != null and content != ''">
+                AND R.CONTENT = #{content}
+            </if>
+          
+            <if test="registDate != null and registDate != ''">
+                AND R.REGIST_DATE = #{registDate}
             </if>
         </where>
     </select>
@@ -70,9 +87,29 @@
             FOODTRUCK_NO,
             GRADE,
             CONTENT,
-            DATE_FORMAT(REGIST_DATE, '%Y-%m-%d %I:%i:%s')
-        FROM review
-        <include refid="whereSql" />
+            REGIST_DATE
+        FROM REVIEW
+        <where> 
+            <if test="no != null and no != ''">
+                AND NO = #{no}
+            </if>
+            <if test="memberNo != null and memberNo != ''">
+                AND MEMBER_NO = #{memberNo}
+            </if>
+            <if test="foodtruckNo != null and foodtruckNo != ''">
+                AND FOODTRUCK_NO = #{foodtruckNo}
+            </if>
+            <if test="grade != null and grade != ''">
+                AND GRADE = #{grade}
+            </if>
+            <if test="content != null and content != ''">
+                AND CONTENT = #{content}
+            </if>
+          
+            <if test="registDate != null and registDate != ''">
+                AND REGIST_DATE = #{registDate}
+            </if>
+        </where>
     </select>
 
     <insert id="insert" parameterType="kr.co.fos.review.Review">
@@ -89,16 +126,13 @@
             #{foodtruckNo},
             #{grade},
             #{content},
-            DATE_FORMAT(#{registDate}, '%Y-%m-%d %I:%i:%s')
+            NOW()
         )
     </insert>
 
     <update id="update" parameterType="kr.co.fos.review.Review">
         UPDATE review
         <set>
-            <if test="no != ''">
-                NO = #{no},
-            </if>
             <if test="memberNo != ''">
                 MEMBER_NO = #{memberNo},
             </if>
@@ -112,9 +146,12 @@
                 CONTENT = #{content},
             </if>
             <if test="registDate != ''">
-                REGIST_DATE = DATE_FORMAT(#{registDate}, '%Y-%m-%d %I:%i:%s'),
+                REGIST_DATE = NOW()
             </if>
         </set>
+        <where>
+        	NO = #{no}
+       	</where>
     </update>
 
     <delete id="delete" parameterType="kr.co.fos.review.Review">

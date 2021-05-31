@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.fos.foodtruck.Foodtruck;
+import kr.co.fos.foodtruck.FoodtruckMapper;
 
 @Service
 public class BookmarkServiceImpl implements BookmarkService {
 	@Autowired 
 	private BookmarkMapper bookmarkMapper;
+	@Autowired
+	private FoodtruckMapper foodtruckMapper;
 	
 	public boolean bookmarkRegister(Bookmark bookmark) {
 		boolean result = false;
@@ -20,14 +23,30 @@ public class BookmarkServiceImpl implements BookmarkService {
 			System.out.println("북마크 등록 서비스 접속");
 			result = true;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		
 		return result;
 	}
 	
 	public List<Foodtruck> bookmarkInquiry(Bookmark bookmark) {
+		try {
+			List<Bookmark> bookmarks = bookmarkMapper.list(bookmark);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
+	}
+	
+	public Bookmark bookmarkDetailInquiry(Bookmark bookmark) {
+		System.out.println("북마크 조회 서비스");
+		try {
+			bookmark = bookmarkMapper.select(bookmark);
+			
+			return bookmark;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bookmark;
 	}
 	
 	public boolean bookmarkDelete(Bookmark bookmark) {
