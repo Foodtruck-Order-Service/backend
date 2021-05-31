@@ -37,10 +37,10 @@
                 AND CATEGORY = #{category}
             </if>
             <if test="startTime != null and startTime != ''">
-                AND START_TIME = #{startTime}
+                AND DATE_FORMAT(START_TIME, '%H:%i') = DATE_FORMAT(#{startTime}, '%H:%i')
             </if>
             <if test="endTime != null and endTime != ''">
-                AND END_TIME = #{endTime}
+            	AND DATE_FORMAT(END_TIME, '%H:%i') = DATE_FORMAT(#{endTime}, '%H:%i')
             </if>
             <if test="content != null and content != ''">
                 AND CONTENT = #{content}
@@ -78,10 +78,10 @@
                 AND CATEGORY = #{category}
             </if>
             <if test="startTime != null and startTime != ''">
-                AND START_TIME = #{startTime}
+               AND DATE_FORMAT(START_TIME, '%H:%i') = DATE_FORMAT(#{startTime}, '%H:%i')
             </if>
             <if test="endTime != null and endTime != ''">
-                AND END_TIME = #{endTime}
+            	AND DATE_FORMAT(END_TIME, '%H:%i') = DATE_FORMAT(#{endTime}, '%H:%i')
             </if>
             <if test="content != null and content != ''">
                 AND CONTENT = #{content}
@@ -114,8 +114,8 @@
 	        BRN,
 	        NAME,
 	        CATEGORY,
-	        START_TIME,
-	        END_TIME,
+	        DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
+	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
 	        CONTENT,
 	        LAT,
 	        LNG,
@@ -125,6 +125,16 @@
 	    <include refid="whereSearchSql" />
     </select>
 
+	<select id="listLocation" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
+		SELECT *
+		FROM FOS.FOODTRUCK
+		HAVING 	(6371*ACOS(COS(RADIANS(#{lat}))*COS(RADIANS(LAT))*COS(RADIANS(LNG)
+				-RADIANS(#{lng}))+sin(RADIANS(lat))*sin(RADIANS(LAT)))) &lt;= 0.3
+		ORDER BY (6371*ACOS(COS(RADIANS(#{lat}))*COS(RADIANS(LAT))*COS(RADIANS(LNG)
+				-RADIANS(#{lng}))+SIN(RADIANS(#{lat}))*SIN(RADIANS(LAT)))) 
+		LIMIT 0,300;
+    </select>
+
     <select id="select" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
         SELECT
             NO,
@@ -132,8 +142,8 @@
             BRN,
             NAME,
             CATEGORY,
-            START_TIME,
-            END_TIME,
+            DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
+	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
             CONTENT,
             LAT,
             LNG,
@@ -150,8 +160,8 @@
             BRN,
             NAME,
             CATEGORY,
-            START_TIME,
-            END_TIME,
+            DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
+	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
             CONTENT,
             LAT,
             LNG,
@@ -163,8 +173,8 @@
             #{brn},
             #{name},
             #{category},
-            #{startTime},
-            #{endTime},
+            DATE_FORMAT(#{startTime}, '%H:%i'),
+            DATE_FORMAT(#{endTime}, '%H:%i'),
             #{content},
             #{lat},
             #{lng},
@@ -192,10 +202,10 @@
                 CATEGORY = #{category},
             </if>
             <if test="startTime != ''">
-                START_TIME = #{startTime},
+            	DATE_FORMAT(START_TIME, '%H:%i') = DATE_FORMAT(#{startTime}, '%H:%i'),
             </if>
             <if test="endTime != ''">
-                END_TIME = #{endTime},
+            	DATE_FORMAT(END_TIME, '%H:%i') = DATE_FORMAT(#{endTime}, '%H:%i')
             </if>
             <if test="content != ''">
                 CONTENT = #{content},

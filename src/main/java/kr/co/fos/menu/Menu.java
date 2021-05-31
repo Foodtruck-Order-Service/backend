@@ -1,47 +1,44 @@
 package kr.co.fos.menu;
 
-import java.sql.Date;
 import java.io.Serializable;
+import java.util.List;
 
 public class Menu implements Serializable {
-    private String no;
-    private String foodtruckNo;
+    private int no;
+    private int foodtruckNo;
     private String name;
     private String amount;
     private String cookingTime;
     private String content;
 
-    private int itemStart;
-    private int itemSizePerPage;
-
+    private List<Option> options;
+    
     public Menu() {
     }
 
-    public Menu(String no, String foodtruckNo, String name, String amount, String cookingTime, String content, int itemStart, int itemSizePerPage) {
+    public Menu(int no, int foodtruckNo, String name, String amount, String cookingTime, String content, List<Option> options) {
         this.no = no;
         this.foodtruckNo = foodtruckNo;
         this.name = name;
         this.amount = amount;
         this.cookingTime = cookingTime;
         this.content = content;
-
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
+        this.options = options;
     }
 
-    public void setNo(String no) {
+    public void setNo(int no) {
         this.no = no;
     }
 
-    public String getNo() {
+    public int getNo() {
         return this.no;
     }
 
-    public void setFoodtruckNo(String foodtruckNo) {
+    public void setFoodtruckNo(int foodtruckNo) {
         this.foodtruckNo = foodtruckNo;
     }
 
-    public String getFoodtruckNo() {
+    public int getFoodtruckNo() {
         return this.foodtruckNo;
     }
 
@@ -77,19 +74,11 @@ public class Menu implements Serializable {
         return this.content;
     }
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
+    public List<Option> getOptions() {
+        return options;
     }
 
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
+    public void setOptions(List<Option> options) {
+        this.options = options;
     }
 }
