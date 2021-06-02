@@ -9,6 +9,20 @@
         <result column="MEMBER_NO" property="memberNo" />
         <result column="FOODTRUCK_NO" property="foodtruckNo" />
     </resultMap>
+    <resultMap id="foodtruckResultMap" type="kr.co.fos.foodtruck.Foodtruck">
+        <result column="NO" property="no" />
+        <result column="MEMBER_NO" property="memberNo" />
+        <result column="BRN" property="brn" />
+        <result column="NAME" property="name" />
+        <result column="CATEGORY" property="category" />
+        <result column="START_TIME" property="startTime" />
+        <result column="END_TIME" property="endTime" />
+        <result column="CONTENT" property="content" />
+        <result column="LAT" property="lat" />
+        <result column="LNG" property="lng" />
+        <result column="APPROVAL" property="approval" />
+        <result column="STATUS" property="status" />
+    </resultMap>
 
     <sql id="whereSql">
         <where>
@@ -30,16 +44,36 @@
         <include refid="whereSql" />
     </select>
 
-    <select id="list" parameterType="kr.co.fos.bookmark.Bookmark" resultMap="bookmarkResultMap">
-        SELECT *
-        FROM (
-            SELECT
-                NO,
-                MEMBER_NO,
-                FOODTRUCK_NO
-            FROM bookmark
-            <include refid="whereSql" />
-        ) TB
+    <select id="list" parameterType="kr.co.fos.bookmark.Bookmark" resultMap="foodtruckResultMap">
+        
+           	SELECT
+				F.NO,
+				F.MEMBER_NO,
+				F.BRN,
+				F.NAME,
+				F.CATEGORY,
+				F.START_TIME,
+				F.END_TIME,
+				F.CONTENT,
+				F.LAT,
+				F.LNG,
+				F.APPROVAL,
+				F.STATUS
+			FROM FOODTRUCK F, BOOKMARK B
+			
+            <where>
+            F.NO = B.FOODTRUCK_NO
+            <if test="no != null and no != ''">
+                AND B.NO = #{no}
+            </if>
+            <if test="memberNo != null and memberNo != ''">
+                AND B.MEMBER_NO = #{memberNo}
+            </if>
+            <if test="foodtruckNo != null and foodtruckNo != ''">
+                AND B.FOODTRUCK_NO = #{foodtruckNo}
+            </if>
+        </where>
+        
         
     </select>
 

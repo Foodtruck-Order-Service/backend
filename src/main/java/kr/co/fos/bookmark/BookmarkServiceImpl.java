@@ -30,7 +30,9 @@ public class BookmarkServiceImpl implements BookmarkService {
 	
 	public List<Foodtruck> bookmarkInquiry(Bookmark bookmark) {
 		try {
-			List<Bookmark> bookmarks = bookmarkMapper.list(bookmark);
+			List<Foodtruck> bookmarks = bookmarkMapper.list(bookmark);
+			System.out.println("북마크 조회 서비스======" + bookmarks);
+			return bookmarks;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

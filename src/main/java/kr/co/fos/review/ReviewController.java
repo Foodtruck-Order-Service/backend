@@ -2,6 +2,8 @@ package kr.co.fos.review;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +25,35 @@ public class ReviewController {
 	@Autowired
 	private ReviewServiceImpl reviewServiceImpl;
 	
+	/*
+	 * @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE) public
+	 * ResponseEntity<Object> doReviewRegister(
+	 * 
+	 * @RequestParam("image") MultipartFile image,
+	 * 
+	 * @RequestParam("memberNo") String memberNo,
+	 * 
+	 * @RequestParam("foodtruckNo") String foodtruckNo,
+	 * 
+	 * @RequestParam("grade") String grade,
+	 * 
+	 * @RequestParam("content") String content) {
+	 * System.out.println("리뷰 등록 컨트롤러 들어옴::::::::::::::::::::::::::::::::::");
+	 * Review review = new Review(); review.setMemberNo(Integer.parseInt(memberNo));
+	 * review.setFoodtruckNo(Integer.parseInt(foodtruckNo)); review.setGrade(grade);
+	 * review.setContent(content);
+	 * 
+	 * reviewServiceImpl.reviewRegister(review, image); return
+	 * ResponseEntity.status(HttpStatus.OK).body("성공"); }
+	 */
 	@PostMapping
-	public ResponseEntity<Object> doReviewRegister(@RequestBody Review review, MultipartFile attach) {
-		System.out.println("컨트롤러 들어옴");
-		reviewServiceImpl.reviewRegister(review, attach);
+	public ResponseEntity<Object> doReviewRegister(@RequestBody Review review) {
+		System.out.println("리뷰 등록 컨트롤러 들어옴::::::::::::::::::::::::::::::::::");
+		
+		System.out.println(review);
+		reviewServiceImpl.reviewRegister(review); 
 		return ResponseEntity.status(HttpStatus.OK).body("성공");
 	}
-	
 	@GetMapping
 	public ResponseEntity<Object> doReviewListInquiry(@RequestParam int no) {
 		System.out.println("푸드트럭 번호 : "  + no);
@@ -47,11 +71,15 @@ public class ReviewController {
 	
 	//리뷰 상세조회
 	@GetMapping("/{no}")
-	public ResponseEntity<Object> doReviewDetailInquiry(@PathVariable int no) {
-		System.out.println("리뷰 번호 : "  + no);
+	public ResponseEntity<Object> doReviewDetailInquiry(@PathVariable("no") int memberNo, @PathParam("foodtruckNo")int foodtruckNo) {
+		System.out.println("멤버 번호 : "  + memberNo);
+		System.out.println("푸드트럭 번호 : "  + foodtruckNo);
+		Review review = new Review();
+		review.setMemberNo(memberNo);
+		review.setFoodtruckNo(foodtruckNo);
 		try {
-			Review review = reviewServiceImpl.reviewDetailInquiry(no);
-			System.out.println(review);
+			review = reviewServiceImpl.reviewDetailInquiry(review);
+			System.out.println("리뷰상세조회 컨트롤러 : " + review);
 			
 			return ResponseEntity.status(HttpStatus.OK).body(review);
 		} catch (Exception e) {
@@ -70,7 +98,8 @@ public class ReviewController {
 	}
 	
 	@DeleteMapping("/{no}")
-	public ResponseEntity<Object> doReviewDelete(Review review) {
-		return null;
+	public ResponseEntity<Object> doReviewDelete(@PathVariable int no) {
+		reviewServiceImpl.reviewDelete(no);
+		return ResponseEntity.status(HttpStatus.OK).body("성공");
 	}
 }
