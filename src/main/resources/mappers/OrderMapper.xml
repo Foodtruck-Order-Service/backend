@@ -60,27 +60,8 @@
 
     <select id="list" parameterType="kr.co.fos.order.Order" resultMap="orderResultMap">
         SELECT *
-        FROM (
-            SELECT
-                NO,
-                MEMBER_NO,
-                FOODTRUCK_NO,
-                RECEPTION_NO,
-                DATE_FORMAT(ORDER_TIME, '%Y-%m-%d %I:%i:%s'),
-                TOTAL_AMOUNT,
-                PAYMENT_TYPE,
-                STATUS,
-                LAT,
-                LNG
-            FROM order
+        FROM fos.order
             <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
     </select>
 
     <select id="select" parameterType="kr.co.fos.order.Order" resultMap="orderResultMap">
@@ -126,30 +107,30 @@
     </insert>
 
     <update id="update" parameterType="kr.co.fos.order.Order">
-        UPDATE order
+        UPDATE fos.order
         <set>
-            <if test="no != ''">
+            <if test="no > 0">
                 NO = #{no},
             </if>
-            <if test="memberNo != ''">
+            <if test="memberNo > 0">
                 MEMBER_NO = #{memberNo},
             </if>
-            <if test="foodtruckNo != ''">
+            <if test="foodtruckNo > 0">
                 FOODTRUCK_NO = #{foodtruckNo},
             </if>
-            <if test="receptionNo != ''">
+            <if test="receptionNo > 0">
                 RECEPTION_NO = #{receptionNo},
             </if>
-            <if test="orderTime != ''">
+            <if test="orderTime != null">
                 ORDER_TIME = DATE_FORMAT(#{orderTime}, '%Y-%m-%d %I:%i:%s'),
             </if>
-            <if test="totalAmount != ''">
+            <if test="totalAmount != null">
                 TOTAL_AMOUNT = #{totalAmount},
             </if>
-            <if test="paymentType != ''">
+            <if test="paymentType != null">
                 PAYMENT_TYPE = #{paymentType},
             </if>
-            <if test="status != ''">
+            <if test="status != null">
                 STATUS = #{status},
             </if>
             <if test="lat > 0">
@@ -159,6 +140,7 @@
                 LNG = #{lng},
             </if>
         </set>
+        WHERE NO = #{no}
     </update>
 
     <delete id="delete" parameterType="kr.co.fos.order.Order">

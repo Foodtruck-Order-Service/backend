@@ -61,4 +61,6 @@ public class MemberController {
 	public ResponseEntity<Object> doBusinessAuth(Member member) {
 		return null;
 	}
+	
+	
 }

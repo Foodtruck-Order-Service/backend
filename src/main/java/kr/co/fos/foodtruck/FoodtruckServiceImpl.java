@@ -52,9 +52,15 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 	}
 
 	@Override
-	public Foodtruck foodtruckDetailInquiry(int no) {
-		// TODO Auto-generated method stub
-		return null;
+	public Foodtruck foodtruckDetailInquiry(Foodtruck foodtruck) {
+		Foodtruck foodtruckData = null;
+		try {
+			foodtruckData = foodtruckMapper.select(foodtruck);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return foodtruckData;
 	}
 
 	@Override

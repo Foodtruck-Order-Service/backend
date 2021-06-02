@@ -4,10 +4,10 @@ import java.sql.Date;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    private String no;
-    private String memberNo;
-    private String foodtruckNo;
-    private String receptionNo;
+    private int no;
+    private int memberNo;
+    private int foodtruckNo;
+    private int receptionNo;
     private Date orderTime;
     private String totalAmount;
     private String paymentType;
@@ -21,7 +21,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(String no, String memberNo, String foodtruckNo, String receptionNo, Date orderTime, String totalAmount, String paymentType, String status, int lat, int lng, int itemStart, int itemSizePerPage) {
+    public Order(int no, int memberNo, int foodtruckNo, int receptionNo, Date orderTime, String totalAmount, String paymentType, String status, int lat, int lng, int itemStart, int itemSizePerPage) {
         this.no = no;
         this.memberNo = memberNo;
         this.foodtruckNo = foodtruckNo;
@@ -37,35 +37,35 @@ public class Order implements Serializable {
         this.itemSizePerPage = itemSizePerPage;
     }
 
-    public void setNo(String no) {
+    public void setNo(int no) {
         this.no = no;
     }
 
-    public String getNo() {
+    public int getNo() {
         return this.no;
     }
 
-    public void setMemberNo(String memberNo) {
+    public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
     }
 
-    public String getMemberNo() {
+    public int getMemberNo() {
         return this.memberNo;
     }
 
-    public void setFoodtruckNo(String foodtruckNo) {
+    public void setFoodtruckNo(int foodtruckNo) {
         this.foodtruckNo = foodtruckNo;
     }
 
-    public String getFoodtruckNo() {
+    public int getFoodtruckNo() {
         return this.foodtruckNo;
     }
 
-    public void setReceptionNo(String receptionNo) {
+    public void setReceptionNo(int receptionNo) {
         this.receptionNo = receptionNo;
     }
 
-    public String getReceptionNo() {
+    public int getReceptionNo() {
         return this.receptionNo;
     }
 
