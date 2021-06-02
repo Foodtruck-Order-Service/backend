@@ -16,8 +16,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewMapper reviewMapper;
 	
 	@Override
-	public boolean reviewRegister(Review review, MultipartFile attach) {
-		this.downloadFile(attach);
+	public boolean reviewRegister(Review review) {
 		System.out.println("리뷰 등록 서비스 들어옴" + review);
 		try {
 			reviewMapper.insert(review);

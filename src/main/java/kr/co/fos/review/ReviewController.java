@@ -51,7 +51,7 @@ public class ReviewController {
 		System.out.println("리뷰 등록 컨트롤러 들어옴::::::::::::::::::::::::::::::::::");
 		
 		System.out.println(review);
-		/* reviewServiceImpl.reviewRegister(review, image); */
+		reviewServiceImpl.reviewRegister(review); 
 		return ResponseEntity.status(HttpStatus.OK).body("성공");
 	}
 	@GetMapping
