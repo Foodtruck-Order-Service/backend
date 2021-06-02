@@ -12,10 +12,10 @@
 
     <sql id="whereSql">
         <where>
-            <if test="no != null and no != ''">
+            <if test="no > 0">
                 AND NO = #{no}
             </if>
-            <if test="menuNo != null and menuNo != ''">
+            <if test="menuNo > 0">
                 AND MENU_NO = #{menuNo}
             </if>
             <if test="optionName != null and optionName != ''">
@@ -35,7 +35,7 @@
                 NO,
                 MENU_NO,
                 OPTION_NAME
-            FROM option
+            FROM FOS.OPTION
             <include refid="whereSql" />
     </select>
 

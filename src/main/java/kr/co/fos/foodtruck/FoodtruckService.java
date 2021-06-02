@@ -11,4 +11,5 @@ public interface FoodtruckService {
 	public boolean foodtruckUpdate(Foodtruck foodtruck);
 	public boolean foodtruckDelete(Foodtruck foodtruck);
 	public boolean foodtruckLocationRegister(Foodtruck foodtruck);
+	public List<Foodtruck> foodtruckLocationInquiry(Foodtruck foodtruck);
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,7 @@ public class FoodtruckController {
 	}
 	
 	@PutMapping("/{no}")
-	public ResponseEntity<Object> doFoodTruckUpdate(@RequestBody Foodtruck foodtruck) {
+	public ResponseEntity<Object> doFoodTruckUpdate(@PathVariable int no, @RequestBody Foodtruck foodtruck) {
 		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(false);
@@ -58,5 +59,12 @@ public class FoodtruckController {
 		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(false);
+	}
+	
+	@PostMapping("/location")
+	public ResponseEntity<Object> doFoodtruckLocationInquiry(Foodtruck foodtruck) {
+		List<Foodtruck> result = foodtruckService.foodtruckLocationInquiry(foodtruck);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 }

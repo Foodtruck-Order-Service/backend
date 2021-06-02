@@ -65,7 +65,11 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 			original = foodtruckMapper.select(original);
 			
 			if (foodtruck.getBrn() != original.getBrn()) {
+				System.out.println("--");
 				foodtruck.setApproval("N");
+			} else {
+				System.out.println("++");
+				foodtruck.setBrn(null);
 			}
 			
 			return foodtruckMapper.update(foodtruck);
@@ -104,4 +108,15 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 		return false;
 	}
 
+	public List<Foodtruck> foodtruckLocationInquiry(Foodtruck foodtruck) {
+		try {
+			List<Foodtruck> list = foodtruckMapper.list(foodtruck);
+			
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

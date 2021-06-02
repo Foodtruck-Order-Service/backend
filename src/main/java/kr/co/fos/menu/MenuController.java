@@ -32,7 +32,9 @@ public class MenuController {
 	
 	@GetMapping("/{no}")
 	public ResponseEntity<Object> doMenuDetailInquiry(Menu menu) {
-		return null;
+		Menu result = menuService.menuDetailInquiry(menu);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@PutMapping("/{no}")
