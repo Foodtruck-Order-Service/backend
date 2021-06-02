@@ -39,7 +39,8 @@ public class FoodtruckController {
 	
 	@GetMapping("/{no}")
 	public ResponseEntity<Object> doFoodTruckDeatilInquiry(Foodtruck foodtruck) {
-		return null;
+		Foodtruck foodtruckdata = foodtruckService.foodtruckDetailInquiry(foodtruck);
+		return ResponseEntity.status(HttpStatus.OK).body(foodtruckdata);
 	}
 	
 	@PutMapping("/{no}")

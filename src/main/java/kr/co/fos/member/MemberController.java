@@ -50,7 +50,9 @@ public class MemberController {
 	}
 	
 	@DeleteMapping("/{no}")
-	public ResponseEntity<Object> doMemberDelete(Member member) {
+	public ResponseEntity<Object> doMemberDelete(@PathVariable int no) {
+		Member member = new Member();
+		member.setNo(no);
 		boolean result = memberServiceImpl.memberDelete(member);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
@@ -59,4 +61,6 @@ public class MemberController {
 	public ResponseEntity<Object> doBusinessAuth(Member member) {
 		return null;
 	}
+	
+	
 }
