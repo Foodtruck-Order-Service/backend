@@ -1,39 +1,32 @@
 package kr.co.fos.photo;
 
-import java.sql.Date;
 import java.io.Serializable;
 
 public class Photo implements Serializable {
-    private String no;
+    private int no;
     private String typeNumber;
     private String physicalName;
     private String logicalName;
     private String type;
     private String path;
 
-    private int itemStart;
-    private int itemSizePerPage;
-
     public Photo() {
     }
 
-    public Photo(String no, String typeNumber, String physicalName, String logicalName, String type, String path, int itemStart, int itemSizePerPage) {
+    public Photo(int no, String typeNumber, String physicalName, String logicalName, String type, String path) {
         this.no = no;
         this.typeNumber = typeNumber;
         this.physicalName = physicalName;
         this.logicalName = logicalName;
         this.type = type;
         this.path = path;
-
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
     }
 
-    public void setNo(String no) {
+    public void setNo(int no) {
         this.no = no;
     }
 
-    public String getNo() {
+    public int getNo() {
         return this.no;
     }
 
@@ -75,21 +68,5 @@ public class Photo implements Serializable {
 
     public String getPath() {
         return this.path;
-    }
-
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
-
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
     }
 }

@@ -1,14 +1,12 @@
 package kr.co.fos.review;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import kr.co.fos.photo.Photo;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -91,21 +89,21 @@ public class ReviewServiceImpl implements ReviewService {
 		return false;
 	}
 	
-	public void downloadFile(MultipartFile attach) {
-		try {
-			// 사진의 형식이 올바른지?
-			String prefix = attach.getOriginalFilename();
-			String subfix = prefix.split("[.]")[1];
+	// 이미지 출력
+	@Override
+	public byte[] photoView(Review review) throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "fosPhoto";
+		String physical = reviewMapper.select(review).getPhysical();
+		String imgPath = path + File.separator + physical;
 
-			Photo photo = new Photo();
-			photo.setLogicalName(attach.getOriginalFilename());
-			photo.setPhysicalName(UUID.randomUUID().toString() + "_" + attach.getOriginalFilename());
+		File file = new File(imgPath);
 
-			attach.transferTo(new File("D:\\image\\review" + File.separator + photo.getPhysicalName()));
+		if (file != null) {
+			byte[] byteToFile = Files.readAllBytes(file.toPath());
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			return byteToFile;
 		}
 
+		return null;
 	}
 }

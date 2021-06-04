@@ -10,4 +10,5 @@ public interface ReviewService {
 	public Review reviewDetailInquiry(Review review);
 	public boolean reviewUpdate(Review review, MultipartFile attach);
 	public boolean reviewDelete(int no);
+	byte[] photoView(Review review) throws Exception;
 }

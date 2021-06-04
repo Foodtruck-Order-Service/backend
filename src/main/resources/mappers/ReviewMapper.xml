@@ -12,6 +12,9 @@
         <result column="CONTENT" property="content" />
         <result column="REGIST_DATE" property="registDate" />
         <result column="ID" property="id" />
+        <result column="LOGICAL" property="logical" />
+        <result column="PHYSICAL" property="physical" />
+    
     </resultMap>
 
     <sql id="whereSql">
@@ -37,6 +40,13 @@
             <if test="registDate != null and registDate != ''">
                 AND REGIST_DATE = #{registDate}
             </if>
+            <if test="logical != null and logical != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
+            </if>
+            
         </where>
     </sql>
 
@@ -54,7 +64,9 @@
             R.FOODTRUCK_NO FOODTRUCK_NO,
             R.GRADE GRADE,
             R.CONTENT CONTENT,
-            R.REGIST_DATE REGIST_DATE
+            R.REGIST_DATE REGIST_DATE,
+            R.LOGICAL LOGICAL,
+            R.PHYSICAL PHYSICAL
         FROM REVIEW R, MEMBER M
         <where> 
         	R.MEMBER_NO = M.NO  
@@ -77,6 +89,13 @@
             <if test="registDate != null and registDate != ''">
                 AND R.REGIST_DATE = #{registDate}
             </if>
+            <if test="logical != null and logical != ''">
+                AND R.LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND R.PHYSICAL = #{physical}
+            </if>
+            
         </where>
     </select>
 
@@ -87,7 +106,9 @@
             FOODTRUCK_NO,
             GRADE,
             CONTENT,
-            REGIST_DATE
+            REGIST_DATE,
+            LOGICAL,
+            PHYSICAL
         FROM REVIEW
         <where> 
             <if test="no != null and no != ''">
@@ -109,6 +130,12 @@
             <if test="registDate != null and registDate != ''">
                 AND REGIST_DATE = #{registDate}
             </if>
+            <if test="logical != null and logical != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
+            </if>
         </where>
     </select>
 
@@ -119,14 +146,18 @@
             FOODTRUCK_NO,
             GRADE,
             CONTENT,
-            REGIST_DATE
+            REGIST_DATE,
+            LOGICAL,
+            PHYSICAL
         ) VALUES (
             #{no},
             #{memberNo},
             #{foodtruckNo},
             #{grade},
             #{content},
-            NOW()
+            NOW(),
+            #{logical},
+            #{physical}
         )
     </insert>
 
@@ -148,6 +179,13 @@
             <if test="registDate != ''">
                 REGIST_DATE = NOW()
             </if>
+            <if test="logical != null and logical != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
+            </if>
+         
         </set>
         <where>
         	NO = #{no}
