@@ -11,11 +11,13 @@ public class Review implements Serializable {
     private String content;
     private String registDate;
     private String id;
+    private String logical;
+    private String physical;
 
     public Review() {
     }
 
-    public Review(int no, int memberNo, int foodtruckNo, String grade, String content, String registDate, String id) {
+    public Review(int no, int memberNo, int foodtruckNo, String grade, String content, String registDate, String id, String logical, String physical) {
         this.no = no;
         this.memberNo = memberNo;
         this.foodtruckNo = foodtruckNo;
@@ -23,6 +25,8 @@ public class Review implements Serializable {
         this.content = content;
         this.registDate = registDate;
         this.id = id;
+        this.logical = logical;
+        this.physical = physical;
     }
 
 	public int getNo() {
@@ -79,6 +83,23 @@ public class Review implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	
+	public String getLogical() {
+		return logical;
+	}
+
+	public void setLogical(String logical) {
+		this.logical = logical;
+	}
+
+	public String getPhysical() {
+		return physical;
+	}
+
+	public void setPhysical(String physical) {
+		this.physical = physical;
 	}
 
 	@Override
