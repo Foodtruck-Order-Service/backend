@@ -24,4 +24,6 @@ public class CommonController {
 	public ResponseEntity<Object> doPasswordFind(Member member) {
 		return null;
 	}
+	
+	
 }

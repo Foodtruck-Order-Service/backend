@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.fos.foodtruck.Foodtruck;
 import kr.co.fos.foodtruck.FoodtruckServiceImpl;
+import kr.co.fos.member.Member;
+import kr.co.fos.member.MemberServiceImpl;
 
 @RestController
 @RequestMapping("/order")
@@ -25,9 +27,13 @@ public class OrderController {
 	OrderServiceImpl orderServiceImpl;
 	@Autowired
 	FoodtruckServiceImpl foodtruckServiceImpl;
+	@Autowired
+	MemberServiceImpl memberServiceImpl;
 	@PostMapping
-	public ResponseEntity<Object> doOrderRegister(Order order) {
-		return null;
+	public ResponseEntity<Object> doOrderRegister(@RequestBody Order order) {
+		System.out.println(order.toString());
+		int no = orderServiceImpl.orderRegister(order);
+		return ResponseEntity.status(HttpStatus.OK).body(no);
 	}
 	
 	@GetMapping
@@ -53,9 +59,40 @@ public class OrderController {
 		return ResponseEntity.status(HttpStatus.OK).body(listViewItemList);
 	}
 	
+	@GetMapping("/business")
+	public ResponseEntity<Object> doBusinessOrderListInquiry(Order order) {
+		List<Order> orderList = orderServiceImpl.orderListInquiry(order);
+		List<BusinessListViewItem> BusinesslistViewItemList = new ArrayList<BusinessListViewItem>();
+		for(int i = 0; i < orderList.size(); i++) {
+			BusinessListViewItem businessListViewItem = new BusinessListViewItem();
+			Member member= new Member();
+			member.setNo(orderList.get(i).getMemberNo());
+			Member memberData= memberServiceImpl.memberDetailInquiry(member);
+			businessListViewItem.setNo(orderList.get(i).getNo());
+			businessListViewItem.setMemberNo(orderList.get(i).getMemberNo());
+			businessListViewItem.setFoodtruckNo(orderList.get(i).getFoodtruckNo());
+			businessListViewItem.setName(memberData.getName());
+			businessListViewItem.setReceptionNo(orderList.get(i).getReceptionNo());
+			businessListViewItem.setOrderTime(orderList.get(i).getOrderTime());
+			businessListViewItem.setPaymentType(orderList.get(i).getPaymentType());
+			businessListViewItem.setTotalAmount(orderList.get(i).getTotalAmount());
+			businessListViewItem.setStatus(orderList.get(i).getStatus());
+			BusinesslistViewItemList.add(businessListViewItem);
+		}
+		System.out.println(BusinesslistViewItemList);
+		return ResponseEntity.status(HttpStatus.OK).body(BusinesslistViewItemList);
+	}
+	
 	@GetMapping("/{no}")
 	public ResponseEntity<Object> doOrderDetailInquiry(Order order) {
-		return null;
+		Order orderData = orderServiceImpl.orderDetailInquiry(order);
+		return ResponseEntity.status(HttpStatus.OK).body(orderData);
+	}
+	
+	@GetMapping("/business/{no}")
+	public ResponseEntity<Object> doOrderBusinessDetailInquiry(Order order) {
+		Order orderData = orderServiceImpl.orderBusinessDetailInquiry(order);
+		return ResponseEntity.status(HttpStatus.OK).body(orderData);
 	}
 	
 	@PutMapping("/{no}")

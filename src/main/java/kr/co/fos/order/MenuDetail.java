@@ -4,82 +4,82 @@ import java.sql.Date;
 import java.io.Serializable;
 
 public class MenuDetail implements Serializable {
-    private String no;
-    private String orderInfoNo;
+    private int no;
+    private int orderInfoNo;
     private String optionName;
     private String optionValue;
     private String addAmount;
 
-    private int itemStart;
-    private int itemSizePerPage;
-
     public MenuDetail() {
     }
 
-    public MenuDetail(String no, String orderInfoNo, String optionName, String optionValue, String addAmount, int itemStart, int itemSizePerPage) {
-        this.no = no;
-        this.orderInfoNo = orderInfoNo;
-        this.optionName = optionName;
-        this.optionValue = optionValue;
-        this.addAmount = addAmount;
+	@Override
+	public String toString() {
+		return "MenuDetail [no=" + no + ", orderInfoNo=" + orderInfoNo + ", optionName=" + optionName + ", optionValue="
+				+ optionValue + ", addAmount=" + addAmount + "]";
+	}
 
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
-    }
 
-    public void setNo(String no) {
-        this.no = no;
-    }
 
-    public String getNo() {
-        return this.no;
-    }
+	public int getNo() {
+		return no;
+	}
 
-    public void setOrderInfoNo(String orderInfoNo) {
-        this.orderInfoNo = orderInfoNo;
-    }
 
-    public String getOrderInfoNo() {
-        return this.orderInfoNo;
-    }
 
-    public void setOptionName(String optionName) {
-        this.optionName = optionName;
-    }
+	public void setNo(int no) {
+		this.no = no;
+	}
 
-    public String getOptionName() {
-        return this.optionName;
-    }
 
-    public void setOptionValue(String optionValue) {
-        this.optionValue = optionValue;
-    }
 
-    public String getOptionValue() {
-        return this.optionValue;
-    }
+	public int getOrderInfoNo() {
+		return orderInfoNo;
+	}
 
-    public void setAddAmount(String addAmount) {
-        this.addAmount = addAmount;
-    }
 
-    public String getAddAmount() {
-        return this.addAmount;
-    }
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
+	public void setOrderInfoNo(int orderInfoNo) {
+		this.orderInfoNo = orderInfoNo;
+	}
 
-    public int getItemStart() {
-        return this.itemStart;
-    }
 
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
 
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
+	public String getOptionName() {
+		return optionName;
+	}
+
+
+
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
+
+
+
+	public String getOptionValue() {
+		return optionValue;
+	}
+
+
+
+	public void setOptionValue(String optionValue) {
+		this.optionValue = optionValue;
+	}
+
+
+
+	public String getAddAmount() {
+		return addAmount;
+	}
+
+
+
+	public void setAddAmount(String addAmount) {
+		this.addAmount = addAmount;
+	}
+	
+	
+
+    
 }

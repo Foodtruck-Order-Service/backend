@@ -9,7 +9,7 @@ public class ListViewItem implements Serializable{
     private int foodtruckNo;
     private String name;
     private int receptionNo;
-    private Date orderTime;
+    private String orderTime;
     private String totalAmount;
     private String status;
     
@@ -64,11 +64,11 @@ public class ListViewItem implements Serializable{
 		this.receptionNo = receptionNo;
 	}
 
-	public Date getOrderTime() {
+	public String getOrderTime() {
 		return orderTime;
 	}
 
-	public void setOrderTime(Date orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 
