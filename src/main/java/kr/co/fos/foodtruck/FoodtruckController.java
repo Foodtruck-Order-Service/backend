@@ -55,14 +55,14 @@ public class FoodtruckController {
 		return null;
 	}
 	
-	@PostMapping("/{no}/location")
+	@PutMapping("/{no}/location")
 	public ResponseEntity<Object> doFoodtruckLocationRegister(@RequestBody Foodtruck foodtruck) {
 		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
 		
 		return ResponseEntity.status(HttpStatus.OK).body(false);
 	}
 	
-	@PostMapping("/location")
+	@GetMapping("/location")
 	public ResponseEntity<Object> doFoodtruckLocationInquiry(Foodtruck foodtruck) {
 		List<Foodtruck> result = foodtruckService.foodtruckLocationInquiry(foodtruck);
 		

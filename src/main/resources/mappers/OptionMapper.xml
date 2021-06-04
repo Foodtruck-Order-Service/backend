@@ -12,10 +12,10 @@
 
     <sql id="whereSql">
         <where>
-            <if test="no > 0">
+            <if test="no != null and no != ''">
                 AND NO = #{no}
             </if>
-            <if test="menuNo > 0">
+            <if test="menuNo != null and menuNo != ''">
                 AND MENU_NO = #{menuNo}
             </if>
             <if test="optionName != null and optionName != ''">
@@ -48,16 +48,19 @@
         <include refid="whereSql" />
     </select>
 
-    <insert id="insert" parameterType="kr.co.fos.menu.Option">
-        INSERT INTO option (
-            NO,
-            MENU_NO,
-            OPTION_NAME
-        ) VALUES (
-            #{no},
-            #{menuNo},
-            #{optionName}
-        )
+	<insert id="insert" parameterType="kr.co.fos.menu.Option">
+		INSERT INTO FOS.OPTION (
+			NO,
+			MENU_NO,
+			OPTION_NAME
+		) VALUES (
+			#{no},
+			#{menuNo},
+			#{optionName}
+		)
+		<selectKey resultType="int" keyProperty="no" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
     </insert>
 
     <update id="update" parameterType="kr.co.fos.menu.Option">

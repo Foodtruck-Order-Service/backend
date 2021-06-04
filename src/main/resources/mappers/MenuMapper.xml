@@ -82,6 +82,9 @@
             #{cookingTime},
             #{content}
         )
+        <selectKey resultType="int" keyProperty="no" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>
     </insert>
 
     <update id="update" parameterType="kr.co.fos.menu.Menu">

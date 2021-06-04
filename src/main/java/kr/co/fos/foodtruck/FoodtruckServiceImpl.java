@@ -116,7 +116,7 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 
 	public List<Foodtruck> foodtruckLocationInquiry(Foodtruck foodtruck) {
 		try {
-			List<Foodtruck> list = foodtruckMapper.list(foodtruck);
+			List<Foodtruck> list = foodtruckMapper.listLocation(foodtruck);
 			
 			return list;
 		} catch (Exception e) {

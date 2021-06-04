@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,10 @@ public class MenuController {
 	private MenuServiceImpl menuService;
 	
 	@PostMapping
-	public ResponseEntity<Object> doMenuRegister(Menu menu) {
-		return null;
+	public ResponseEntity<Object> doMenuRegister(@RequestBody Menu menu) {
+		boolean result = menuService.menuRegister(menu);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@GetMapping
@@ -44,6 +47,12 @@ public class MenuController {
 	
 	@DeleteMapping("/{no}")
 	public ResponseEntity<Object> doMenuDelete(Menu menu) {
-		return null;
+		boolean result = menuService.menuDelete(menu);
+		
+		if (result) {
+			return ResponseEntity.status(HttpStatus.OK).body(result);
+		}
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
 	}
 }

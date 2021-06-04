@@ -16,8 +16,39 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public boolean menuRegister(Menu menu) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		
+		try {
+			menuMapper.insert(menu);
+			
+			int menuNo = menu.getNo();
+			if (menuNo > 0) {
+				List<Option> options = menu.getOptions();
+				if (options != null && !options.isEmpty()) {
+					for (Option option : options) {
+						option.setMenuNo(menuNo);
+						optionMapper.insert(option);
+						
+						int optionNo = option.getNo();
+						if (optionNo > 0) {
+							List<OptionValue> optionValues = option.getOptionValues();
+							if (optionValues != null && !optionValues.isEmpty()) {
+								for (OptionValue optionValue : optionValues) {
+									optionValue.setOptionNo(optionNo);
+									optionValueMapper.insert(optionValue);
+								}
+							}
+						}
+					}
+				}
+				
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -69,7 +100,13 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public boolean menuDelete(Menu menu) {
-		// TODO Auto-generated method stub
+		try {
+			
+			return menuMapper.delete(menu);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 
