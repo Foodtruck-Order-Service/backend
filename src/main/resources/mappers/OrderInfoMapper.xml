@@ -40,22 +40,8 @@
 
     <select id="list" parameterType="kr.co.fos.order.OrderInfo" resultMap="orderInfoResultMap">
         SELECT *
-        FROM (
-            SELECT
-                NO,
-                ORDER_NO,
-                MENU_NAME,
-                COUNT,
-                AMOUNT
-            FROM order_info
-            <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
+        FROM order_info
+        <include refid="whereSql" />
     </select>
 
     <select id="select" parameterType="kr.co.fos.order.OrderInfo" resultMap="orderInfoResultMap">
@@ -71,18 +57,18 @@
 
     <insert id="insert" parameterType="kr.co.fos.order.OrderInfo">
         INSERT INTO order_info (
-            NO,
             ORDER_NO,
             MENU_NAME,
             COUNT,
             AMOUNT
         ) VALUES (
-            #{no},
             #{orderNo},
             #{menuName},
             #{count},
             #{amount}
-        )
+        )<selectKey resultType="int" keyProperty="no" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
     </insert>
 
     <update id="update" parameterType="kr.co.fos.order.OrderInfo">

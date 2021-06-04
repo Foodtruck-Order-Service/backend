@@ -1,135 +1,132 @@
 package kr.co.fos.order;
 
 import java.sql.Date;
+import java.util.List;
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    private int no;
+	private int no;
     private int memberNo;
     private int foodtruckNo;
     private int receptionNo;
-    private Date orderTime;
+    private String orderTime;
     private String totalAmount;
     private String paymentType;
     private String status;
     private int lat;
     private int lng;
-
-    private int itemStart;
-    private int itemSizePerPage;
-
+    private String merchantUid;
+    private List<OrderInfo> orderInfos;
+    
     public Order() {
     }
+    
 
-    public Order(int no, int memberNo, int foodtruckNo, int receptionNo, Date orderTime, String totalAmount, String paymentType, String status, int lat, int lng, int itemStart, int itemSizePerPage) {
-        this.no = no;
-        this.memberNo = memberNo;
-        this.foodtruckNo = foodtruckNo;
-        this.receptionNo = receptionNo;
-        this.orderTime = orderTime;
-        this.totalAmount = totalAmount;
-        this.paymentType = paymentType;
-        this.status = status;
-        this.lat = lat;
-        this.lng = lng;
+	@Override
+	public String toString() {
+		return "Order [no=" + no + ", memberNo=" + memberNo + ", foodtruckNo=" + foodtruckNo + ", receptionNo="
+				+ receptionNo + ", orderTime=" + orderTime + ", totalAmount=" + totalAmount + ", paymentType="
+				+ paymentType + ", status=" + status + ", lat=" + lat + ", lng=" + lng + ", merchantUid=" + merchantUid
+				+ ", orderInfos=" + orderInfos + "]";
+	}
 
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
+
+	public String getMerchantUid() {
+		return merchantUid;
+	}
+
+
+	public void setMerchantUid(String merchantUid) {
+		this.merchantUid = merchantUid;
+	}
+
+
+	public int getNo() {
+        return no;
     }
 
     public void setNo(int no) {
         this.no = no;
     }
 
-    public int getNo() {
-        return this.no;
+    public int getMemberNo() {
+        return memberNo;
     }
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
     }
 
-    public int getMemberNo() {
-        return this.memberNo;
+    public int getFoodtruckNo() {
+        return foodtruckNo;
     }
 
     public void setFoodtruckNo(int foodtruckNo) {
         this.foodtruckNo = foodtruckNo;
     }
 
-    public int getFoodtruckNo() {
-        return this.foodtruckNo;
+    public int getReceptionNo() {
+        return receptionNo;
     }
 
     public void setReceptionNo(int receptionNo) {
         this.receptionNo = receptionNo;
     }
 
-    public int getReceptionNo() {
-        return this.receptionNo;
+    public String getOrderTime() {
+        return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
     }
 
-    public Date getOrderTime() {
-        return this.orderTime;
+    public String getTotalAmount() {
+        return totalAmount;
     }
 
     public void setTotalAmount(String totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public String getTotalAmount() {
-        return this.totalAmount;
+    public String getPaymentType() {
+        return paymentType;
     }
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 
-    public String getPaymentType() {
-        return this.paymentType;
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getStatus() {
-        return this.status;
+    public int getLat() {
+        return lat;
     }
 
     public void setLat(int lat) {
         this.lat = lat;
     }
 
-    public int getLat() {
-        return this.lat;
+    public int getLng() {
+        return lng;
     }
 
     public void setLng(int lng) {
         this.lng = lng;
     }
 
-    public int getLng() {
-        return this.lng;
+    public List<OrderInfo> getOrderInfos() {
+        return orderInfos;
     }
 
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
+    public void setOrderInfos(List<OrderInfo> orderInfos) {
+        this.orderInfos = orderInfos;
     }
 
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
 }

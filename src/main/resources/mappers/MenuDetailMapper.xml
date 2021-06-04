@@ -40,22 +40,9 @@
 
     <select id="list" parameterType="kr.co.fos.order.MenuDetail" resultMap="menuDetailResultMap">
         SELECT *
-        FROM (
-            SELECT
-                NO,
-                ORDER_INFO_NO,
-                OPTION_NAME,
-                OPTION_VALUE,
-                ADD_AMOUNT
-            FROM menu_detail
-            <include refid="whereSql" />
-        ) TB
-        <where>
-            <if test="itemStart > -1">
-                RN BETWEEN (#{itemStart} + 1)
-                       AND (#{itemStart} + #{itemSizePerPage})
-            </if>
-        </where>
+        FROM menu_detail
+        <include refid="whereSql" />
+        
     </select>
     <select id="select" parameterType="kr.co.fos.order.MenuDetail" resultMap="menuDetailResultMap">
         SELECT
@@ -69,18 +56,18 @@
     </select>
     <insert id="insert" parameterType="kr.co.fos.order.MenuDetail">
         INSERT INTO menu_detail (
-            NO,
             ORDER_INFO_NO,
             OPTION_NAME,
             OPTION_VALUE,
             ADD_AMOUNT
         ) VALUES (
-            #{no},
             #{orderInfoNo},
             #{optionName},
             #{optionValue},
             #{addAmount}
-        )
+        )<selectKey resultType="int" keyProperty="no" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
     </insert>
 
     <update id="update" parameterType="kr.co.fos.order.MenuDetail">

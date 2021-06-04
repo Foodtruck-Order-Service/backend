@@ -40,6 +40,12 @@ public class MemberController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(memberData);
 	}
+	@GetMapping("/business/{memberNo}")
+	public ResponseEntity<Object> doMemberBusinessInquiry(Member member) {
+		Member memberData = memberServiceImpl.memberDetailInquiry(member);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(memberData);
+	}
 	
 	@PutMapping("/{no}")
 	public ResponseEntity<Object> doMemberUpdate(@PathVariable int no, @RequestBody Member member) {

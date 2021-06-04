@@ -1,85 +1,72 @@
 package kr.co.fos.order;
 
 import java.sql.Date;
+import java.util.List;
 import java.io.Serializable;
 
 public class OrderInfo implements Serializable {
-    private String no;
-    private String orderNo;
-    private String menuName;
-    private String count;
-    private String amount;
+	 private int no;
+	    private int orderNo;
+	    private String menuName;
+	    private int count;
+	    private String amount;
+	    private List<MenuDetail> menuDetails;
+	    
+	    
+	    @Override
+		public String toString() {
+			return "OrderInfo [no=" + no + ", orderNo=" + orderNo + ", menuName=" + menuName + ", count=" + count
+					+ ", amount=" + amount + ", menuDetails=" + menuDetails + "]";
+		}
 
-    private int itemStart;
-    private int itemSizePerPage;
+		public OrderInfo() {
+	    }
 
-    public OrderInfo() {
-    }
+	    public int getNo() {
+	        return no;
+	    }
 
-    public OrderInfo(String no, String orderNo, String menuName, String count, String amount, int itemStart, int itemSizePerPage) {
-        this.no = no;
-        this.orderNo = orderNo;
-        this.menuName = menuName;
-        this.count = count;
-        this.amount = amount;
+	    public void setNo(int no) {
+	        this.no = no;
+	    }
 
-        this.itemStart = itemStart;
-        this.itemSizePerPage = itemSizePerPage;
-    }
+	    public int getOrderNo() {
+	        return orderNo;
+	    }
 
-    public void setNo(String no) {
-        this.no = no;
-    }
+	    public void setOrderNo(int orderNo) {
+	        this.orderNo = orderNo;
+	    }
 
-    public String getNo() {
-        return this.no;
-    }
+	    public String getMenuName() {
+	        return menuName;
+	    }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
+	    public void setMenuName(String menuName) {
+	        this.menuName = menuName;
+	    }
 
-    public String getOrderNo() {
-        return this.orderNo;
-    }
+	    public int getCount() {
+	        return count;
+	    }
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
+	    public void setCount(int count) {
+	        this.count = count;
+	    }
 
-    public String getMenuName() {
-        return this.menuName;
-    }
+	    public String getAmount() {
+	        return amount;
+	    }
 
-    public void setCount(String count) {
-        this.count = count;
-    }
+	    public void setAmount(String amount) {
+	        this.amount = amount;
+	    }
 
-    public String getCount() {
-        return this.count;
-    }
+	    public List<MenuDetail> getMenuDetails() {
+	        return menuDetails;
+	    }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getAmount() {
-        return this.amount;
-    }
-
-    public void setItemStart(int itemStart) {
-        this.itemStart = itemStart;
-    }
-
-    public int getItemStart() {
-        return this.itemStart;
-    }
-
-    public void setItemSizePerPage(int itemSizePerPage) {
-        this.itemSizePerPage = itemSizePerPage;
-    }
-
-    public int getItemSizePerPage() {
-        return this.itemSizePerPage;
-    }
+	    public void setMenuDetails(List<MenuDetail> menuDetails) {
+	        this.menuDetails = menuDetails;
+	    }
 }

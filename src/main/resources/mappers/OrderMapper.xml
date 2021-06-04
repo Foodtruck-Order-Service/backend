@@ -70,19 +70,19 @@
             MEMBER_NO,
             FOODTRUCK_NO,
             RECEPTION_NO,
-            DATE_FORMAT(ORDER_TIME, '%Y-%m-%d %I:%i:%s'),
+            ORDER_TIME,
             TOTAL_AMOUNT,
             PAYMENT_TYPE,
             STATUS,
             LAT,
-            LNG
-        FROM order
+            LNG,
+            MERCHANT_UID
+        FROM fos.order
         <include refid="whereSql" />
     </select>
 
     <insert id="insert" parameterType="kr.co.fos.order.Order">
-        INSERT INTO order (
-            NO,
+        INSERT INTO fos.order (
             MEMBER_NO,
             FOODTRUCK_NO,
             RECEPTION_NO,
@@ -91,27 +91,27 @@
             PAYMENT_TYPE,
             STATUS,
             LAT,
-            LNG
+            LNG,
+            MERCHANT_UID
         ) VALUES (
-            #{no},
             #{memberNo},
             #{foodtruckNo},
-            #{receptionNo},
-            DATE_FORMAT(#{orderTime}, '%Y-%m-%d %I:%i:%s'),
+            (SELECT * FROM (SELECT COUNT(*) + 1  FROM FOS.ORDER WHERE FOODTRUCK_NO = #{foodtruckNo} AND STR_TO_DATE(#{orderTime}, '%Y-%m-%d') = curdate()) RECEPTION_NO),
+            #{orderTime},
             #{totalAmount},
             #{paymentType},
             #{status},
             #{lat},
-            #{lng}
-        )
+            #{lng},
+            #{merchantUid}
+        )<selectKey resultType="int" keyProperty="no" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
     </insert>
 
     <update id="update" parameterType="kr.co.fos.order.Order">
         UPDATE fos.order
         <set>
-            <if test="no > 0">
-                NO = #{no},
-            </if>
             <if test="memberNo > 0">
                 MEMBER_NO = #{memberNo},
             </if>

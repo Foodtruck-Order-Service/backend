@@ -43,6 +43,13 @@ public class FoodtruckController {
 		return ResponseEntity.status(HttpStatus.OK).body(foodtruckdata);
 	}
 	
+	//추가
+	@GetMapping("/business/{memberNo}")
+	public ResponseEntity<Object> doFoodTruckBusinessDeatilInquiry(Foodtruck foodtruck) {
+		Foodtruck foodtruckdata = foodtruckService.foodtruckDetailInquiry(foodtruck);
+		return ResponseEntity.status(HttpStatus.OK).body(foodtruckdata);
+	}
+	
 	@PutMapping("/{no}")
 	public ResponseEntity<Object> doFoodTruckUpdate(@PathVariable int no, @RequestBody Foodtruck foodtruck) {
 		boolean result = foodtruckService.foodtruckUpdate(foodtruck);

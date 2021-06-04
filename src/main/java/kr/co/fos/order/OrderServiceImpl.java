@@ -9,11 +9,33 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements OrderService {
 	@Autowired
 	OrderMapper orderMapper;
+	@Autowired
+	OrderInfoMapper orderInfoMapper;
+	@Autowired
+	MenuDetailMapper menuDetailMapper;
 
 	@Override
-	public boolean orderRegister(Order order) {
-		// TODO Auto-generated method stub
-		return false;
+	public int orderRegister(Order order) {
+		try {
+			orderMapper.insert(order);
+			List<OrderInfo> orderInfoList = order.getOrderInfos();
+			for(int i = 0; i < orderInfoList.size(); i++) {
+				OrderInfo orderInfo = orderInfoList.get(i);
+				orderInfo.setOrderNo(order.getNo());
+				orderInfoMapper.insert(orderInfo);
+				List<MenuDetail> menuDetailList = orderInfo.getMenuDetails();
+				for(int j = 0; j < menuDetailList.size(); j++) {
+					MenuDetail menuDetail = menuDetailList.get(j);
+					menuDetail.setOrderInfoNo(orderInfo.getNo());
+					menuDetailMapper.insert(menuDetail);
+				}
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return order.getNo();
 	}
 
 	@Override
@@ -30,8 +52,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order orderDetailInquiry(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		Order orderData = null;
+		try {
+			orderData = orderMapper.select(order);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return orderData;
 	}
 
 	@Override
@@ -64,6 +92,32 @@ public class OrderServiceImpl implements OrderService {
 	public int waitTimeInquiry(Order order) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Order orderBusinessDetailInquiry(Order order) {
+		Order orderData = new Order();
+		try {
+			orderData = orderMapper.select(order);
+			OrderInfo orderInfoData = new OrderInfo();
+			orderInfoData.setOrderNo(orderData.getNo());
+			List<OrderInfo> orderInfoDataList = orderInfoMapper.list(orderInfoData);
+			if (orderInfoDataList != null) {
+				for(int i =0; i < orderInfoDataList.size(); i++) {
+					MenuDetail menuDetail = new MenuDetail();
+					menuDetail.setOrderInfoNo(orderInfoDataList.get(i).getNo());
+					List<MenuDetail> menuDetailList = menuDetailMapper.list(menuDetail);
+					orderInfoDataList.get(i).setMenuDetails(menuDetailList);
+				}
+				orderData.setOrderInfos(orderInfoDataList);
+			}
+			return orderData;
+		} catch (Exception e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
