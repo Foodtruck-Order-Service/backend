@@ -41,6 +41,7 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 	@Override
 	public List<Foodtruck> foodtruckListInquiry(Foodtruck foodtruck) {
 		try {
+			foodtruck.setApproval("Y");
 			List<Foodtruck> list = foodtruckMapper.list(foodtruck);
 			
 			return list;
@@ -100,11 +101,6 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 	@Override
 	public boolean foodtruckLocationRegister(Foodtruck foodtruck) {
 		try {
-			if (foodtruck.getStatus().equals("N")) {
-				foodtruck.setStatus("Y");
-			} else {
-				foodtruck.setStatus("N");
-			}
 			
 			return foodtruckMapper.update(foodtruck);
 		} catch (Exception e) {

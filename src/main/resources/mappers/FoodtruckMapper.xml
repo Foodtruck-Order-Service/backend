@@ -129,6 +129,7 @@
 	<select id="listLocation" parameterType="kr.co.fos.foodtruck.Foodtruck" resultMap="foodtruckResultMap">
 		SELECT *
 		FROM FOS.FOODTRUCK
+		WHERE STATUS = 'Y' AND APPROVAL = 'Y'
 		HAVING 	(6371*ACOS(COS(RADIANS(#{lat}))*COS(RADIANS(LAT))*COS(RADIANS(LNG)
 				-RADIANS(#{lng}))+sin(RADIANS(#{lat}))*sin(RADIANS(LAT)))) &lt;= 0.3
 		ORDER BY (6371*ACOS(COS(RADIANS(#{lat}))*COS(RADIANS(LAT))*COS(RADIANS(LNG)
@@ -161,8 +162,8 @@
             BRN,
             NAME,
             CATEGORY,
-            DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
-	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
+            START_TIME,
+	        END_TIME,
             CONTENT,
             LAT,
             LNG,
@@ -174,8 +175,8 @@
             #{brn},
             #{name},
             #{category},
-            DATE_FORMAT(#{startTime}, '%H:%i'),
-            DATE_FORMAT(#{endTime}, '%H:%i'),
+            #{startTime},
+            #{endTime},
             #{content},
             #{lat},
             #{lng},

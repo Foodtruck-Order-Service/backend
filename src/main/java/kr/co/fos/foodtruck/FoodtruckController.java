@@ -54,7 +54,7 @@ public class FoodtruckController {
 	public ResponseEntity<Object> doFoodTruckUpdate(@PathVariable int no, @RequestBody Foodtruck foodtruck) {
 		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(false);
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@DeleteMapping("/{no}")
@@ -64,9 +64,9 @@ public class FoodtruckController {
 	
 	@PutMapping("/{no}/location")
 	public ResponseEntity<Object> doFoodtruckLocationRegister(@RequestBody Foodtruck foodtruck) {
-		boolean result = foodtruckService.foodtruckUpdate(foodtruck);
+		boolean result = foodtruckService.foodtruckLocationRegister(foodtruck);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(false);
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 	
 	@GetMapping("/location")
