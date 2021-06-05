@@ -38,10 +38,10 @@
 
 			<div class="reservation-page__wrap">
 				<a class="itemGallery__link" href="/main" data-size="600x600"> 
-					<img class="cover ls-is-cached lazyloaded" src="/images/logo.jpg" alt="AnotherSpace">
+					<img class="cover ls-is-cached lazyloaded" src="/images/logo.jpg" alt="foodtruck">
 				</a>
 
-				<form id="payment-form" class="row mt-2 mt-sm-4" action="/login" method="post">
+				<form id="payment-form" class="row mt-2 mt-sm-4" action="/admin/login" method="post">
 					<div class="col-12">
 						<div class="form-group">
 							<label class="label" for="id">아이디</label> 
@@ -58,22 +58,12 @@
 					<div class="col-12 col-sm-20 mt-2 mt-sm-3 order-1 order-sm-1">
 						<button type="submit" class="btn btn__medium w-100">로그인</button>
 					</div>
-					<div class="col-12 col-sm-3 mt-8 mt-sm-3 order-2 order-sm-2">
-						<a href="/member/findid" class="label">아이디 찾기</a>
-					</div>
-					<div class="col-12 col-sm-3 mt-2 mt-sm-3 order-2 order-sm-3">
-						<a href="/member/findpassword" class="label">비밀번호 찾기</a>
-					</div>
-					<div class="col-12 col-sm-3 mt-2 mt-sm-3 order-2 order-sm-4">
-						<a href="/member/form" class="label">회원 가입</a>
-					</div>
 				</form>
 			</div>
 		</div>
-		<div class="reservation-page__right js-image js-scale-down" data-image="/images/ex2.jpg"></div>
+		<div class="reservation-page__right js-image js-scale-down" data-image="/images/foodtruck.jpg"></div>
 	</main>
 	<!-- Footer -->
-	<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
 	<!-- /Content -->
 	<!-- JavaScripts -->
 	<script src="/js/jquery-3.4.1.min.js"></script>

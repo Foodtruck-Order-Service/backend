@@ -965,7 +965,7 @@ input:required:invalid {
 
 /* Buttons */
 .btn {
-  background-color: #708090;
+  background-color: #FACC2E;
   border: 0;
   border-radius: 5rem;
   box-shadow: 0px 16px 48px rgba(201, 169, 106, 0.16);
@@ -1089,7 +1089,7 @@ input:required:invalid {
   }
 }
 .btn__second {
-  background-color: #708090;
+  background-color: #FACC2E;
   border: 1px solid rgba(169, 172, 181, 0.2);
   box-shadow: none;
   color: #FFF;
