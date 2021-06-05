@@ -8,4 +8,5 @@ public interface MenuService {
 	public Menu menuDetailInquiry(Menu menu);
 	public boolean menuUpdate(Menu menu);
 	public boolean menuDelete(Menu menu);
+	public byte[] photoView(Menu menu) throws Exception;
 }

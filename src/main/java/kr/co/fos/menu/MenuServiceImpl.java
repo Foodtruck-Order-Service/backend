@@ -1,9 +1,13 @@
 package kr.co.fos.menu;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kr.co.fos.foodtruck.Foodtruck;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -108,6 +112,23 @@ public class MenuServiceImpl implements MenuService {
 		}
 		
 		return false;
+	}
+	
+	// 이미지 출력
+	public byte[] photoView(Menu menu) throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "fosPhoto";
+		String physical = menuMapper.select(menu).getPhysical();
+		String imgPath = path + File.separator + physical;
+
+		File file = new File(imgPath);
+
+		if (file != null) {
+			byte[] byteToFile = Files.readAllBytes(file.toPath());
+
+			return byteToFile;
+		}
+
+		return null;
 	}
 
 }

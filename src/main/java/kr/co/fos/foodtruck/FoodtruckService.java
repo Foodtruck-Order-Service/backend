@@ -12,4 +12,5 @@ public interface FoodtruckService {
 	public boolean foodtruckDelete(Foodtruck foodtruck);
 	public boolean foodtruckLocationRegister(Foodtruck foodtruck);
 	public List<Foodtruck> foodtruckLocationInquiry(Foodtruck foodtruck);
+	public byte[] photoView(Foodtruck foodtruck) throws Exception;
 }
