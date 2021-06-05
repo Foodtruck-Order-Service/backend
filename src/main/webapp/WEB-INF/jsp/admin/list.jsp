@@ -5,14 +5,14 @@
 <html>
 	<head>
 	    <meta charset="UTF-8" />
-	    <title>SRUS – Another space</title>
+	    <title>FOS-FOODTRUCK SERVICE</title>
 	
 		<!-- Favicons -->
 		<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
 		<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
 		<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-		<link rel="shortcut icon" href="/images/favicons/favicon.png" type="image/png">
+		<link rel="shortcut icon" href="/images/logo.jpg" type="image/png">
 	
 	    <!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="/styles/style.css"/>

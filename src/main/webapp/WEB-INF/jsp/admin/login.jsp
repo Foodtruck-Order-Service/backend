@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8" />
-	<title>SRUS – Another space</title>
+	<title>FOS-FOODTRUCK SERVICE</title>
 
 	<!-- Favicons -->
 	<link rel="apple-touch-icon" sizes="144x144"
@@ -15,7 +15,7 @@
 		href="/images/favicons/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="57x57"
 		href="/images/favicons/apple-touch-icon-57x57.png">
-	<link rel="shortcut icon" href="/images/favicons/favicon.png"
+	<link rel="shortcut icon" href="/images/logo.jpg"
 		type="image/png">
 	
 	<!-- Styles -->
