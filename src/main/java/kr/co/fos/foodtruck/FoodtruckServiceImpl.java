@@ -1,5 +1,7 @@
 package kr.co.fos.foodtruck;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.fos.member.Member;
 import kr.co.fos.member.MemberMapper;
+import kr.co.fos.review.Review;
 
 @Service
 public class FoodtruckServiceImpl implements FoodtruckService {
@@ -123,6 +126,22 @@ public class FoodtruckServiceImpl implements FoodtruckService {
 			e.printStackTrace();
 		}
 		
+		return null;
+	}
+	// 이미지 출력
+	public byte[] photoView(Foodtruck foodtruck) throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "fosPhoto";
+		String physical = foodtruckMapper.select(foodtruck).getPhysical();
+		String imgPath = path + File.separator + physical;
+
+		File file = new File(imgPath);
+
+		if (file != null) {
+			byte[] byteToFile = Files.readAllBytes(file.toPath());
+
+			return byteToFile;
+		}
+
 		return null;
 	}
 }

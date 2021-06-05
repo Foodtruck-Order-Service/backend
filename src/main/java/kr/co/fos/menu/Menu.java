@@ -10,19 +10,24 @@ public class Menu implements Serializable {
     private String amount;
     private String cookingTime;
     private String content;
+    private String logical;
+    private String physical;
 
     private List<Option> options;
     
     public Menu() {
     }
 
-    public Menu(int no, int foodtruckNo, String name, String amount, String cookingTime, String content, List<Option> options) {
+    public Menu(int no, int foodtruckNo, String name, String amount, String cookingTime, String content, String logical, String physical, List<Option> options) {
         this.no = no;
         this.foodtruckNo = foodtruckNo;
         this.name = name;
         this.amount = amount;
         this.cookingTime = cookingTime;
         this.content = content;
+        this.options = options;
+        this.logical = logical;
+        this.physical = physical;
         this.options = options;
     }
 
@@ -81,4 +86,20 @@ public class Menu implements Serializable {
     public void setOptions(List<Option> options) {
         this.options = options;
     }
+
+	public String getLogical() {
+		return logical;
+	}
+
+	public void setLogical(String logical) {
+		this.logical = logical;
+	}
+
+	public String getPhysical() {
+		return physical;
+	}
+
+	public void setPhysical(String physical) {
+		this.physical = physical;
+	}
 }

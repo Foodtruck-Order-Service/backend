@@ -17,6 +17,8 @@
         <result column="LNG" property="lng" />
         <result column="APPROVAL" property="approval" />
         <result column="STATUS" property="status" />
+        <result column="LOGICAL" property="logical" />
+        <result column="PHYSICAL" property="physical" />
     </resultMap>
 
     <sql id="whereSql">
@@ -56,6 +58,12 @@
             </if>
             <if test="status != null and status != ''">
                 AND STATUS = #{status}
+            </if>
+            <if test="logical != null and logical != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
             </if>
         </where>
     </sql>
@@ -98,6 +106,12 @@
             <if test="status != null and status != ''">
                 AND STATUS = #{status}
             </if>
+            <if test="logical != null and logicall != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
+            </if>
         </where>
     </sql>
 	
@@ -114,13 +128,15 @@
 	        BRN,
 	        NAME,
 	        CATEGORY,
-	        DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
-	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
+	        START_TIME,
+	        END_TIME,
 	        CONTENT,
 	        LAT,
 	        LNG,
 	        APPROVAL,
-	        STATUS
+	        STATUS,
+	        LOGICAL,
+	        PHYSICAL
 	    FROM FOS.FOODTRUCK
 	    <include refid="whereSearchSql" />
 	    ORDER BY STATUS DESC;
@@ -143,44 +159,50 @@
             BRN,
             NAME,
             CATEGORY,
-            DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
-	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
+            START_TIME,
+	        END_TIME,
             CONTENT,
             LAT,
             LNG,
             APPROVAL,
-            STATUS
+            STATUS,
+            LOGICAL,
+            PHYSICAL
         FROM foodtruck
         <include refid="whereSql" />
     </select>
 
     <insert id="insert" parameterType="kr.co.fos.foodtruck.Foodtruck">
-        INSERT INTO foodtruck (
+        INSERT INTO fos.foodtruck (
             NO,
             MEMBER_NO,
             BRN,
             NAME,
             CATEGORY,
-            DATE_FORMAT(START_TIME, '%H:%i') AS START_TIME,
-	        DATE_FORMAT(END_TIME, '%H:%i') AS END_TIME,
+            START_TIME,
+	        END_TIME,
             CONTENT,
             LAT,
             LNG,
             APPROVAL,
-            STATUS
+            STATUS,
+            LOGICAL,
+            PHYSICAL
         ) VALUES (
             #{no},
             #{memberNo},
             #{brn},
             #{name},
             #{category},
-            DATE_FORMAT(#{startTime}, '%H:%i'),
-            DATE_FORMAT(#{endTime}, '%H:%i'),
+            #{startTime},
+            #{endTime},
             #{content},
             #{lat},
             #{lng},
             #{approval},
-            #{status}
+            #{status},
+            #{logical},
+            #{physical}
         )
     </insert>
 
@@ -216,6 +238,12 @@
             </if>
             <if test="status != null">
                 STATUS = #{status},
+            </if>
+            <if test="logical != null">
+                LOGICAL = #{logical},
+            </if>
+            <if test="physical != null">
+                PHYSICAL = #{physical},
             </if>
         </set>
         WHERE NO = #{no}

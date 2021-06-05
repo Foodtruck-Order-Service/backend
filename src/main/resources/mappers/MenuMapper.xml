@@ -11,6 +11,8 @@
         <result column="AMOUNT" property="amount" />
         <result column="COOKING_TIME" property="cookingTime" />
         <result column="CONTENT" property="content" />
+        <result column="LOGICAL" property="logical" />
+        <result column="PHYSICAL" property="physical" />
     </resultMap>
 
     <sql id="whereSql">
@@ -33,6 +35,12 @@
             <if test="content != null and content != ''">
                 AND CONTENT = #{content}
             </if>
+            <if test="logical != null and logical != ''">
+                AND LOGICAL = #{logical}
+            </if>
+            <if test="physical != null and physical != ''">
+                AND PHYSICAL = #{physical}
+            </if>
         </where>
     </sql>
 
@@ -49,7 +57,9 @@
                 NAME,
                 AMOUNT,
                 COOKING_TIME,
-                CONTENT
+                CONTENT,
+                LOGICAL,
+                PHYSICAL
             FROM menu
             <include refid="whereSql" />
     </select>
@@ -61,7 +71,9 @@
             NAME,
             AMOUNT,
             COOKING_TIME,
-            CONTENT
+            CONTENT,
+            LOGICAL,
+            PHYSICAL
         FROM menu
         <include refid="whereSql" />
     </select>
@@ -73,14 +85,18 @@
             NAME,
             AMOUNT,
             COOKING_TIME,
-            CONTENT
+            CONTENT,
+            LOGICAL,
+            PHYSICAL
         ) VALUES (
             #{no},
             #{foodtruckNo},
             #{name},
             #{amount},
             #{cookingTime},
-            #{content}
+            #{content},
+            #{logical},
+            #{physical}
         )
         <selectKey resultType="int" keyProperty="no" order="AFTER">
         	SELECT LAST_INSERT_ID()
@@ -107,6 +123,12 @@
             </if>
             <if test="content != ''">
                 CONTENT = #{content},
+            </if>
+            <if test="logical != ''">
+                LOGICAL = #{logical},
+            </if>
+            <if test="physical != ''">
+                PHYSICAL = #{physical},
             </if>
         </set>
     </update>
